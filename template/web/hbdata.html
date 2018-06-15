@@ -1,0 +1,82 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/zh_tcwq/template/public/ygcsslist.css">
+<style type="text/css">
+    .row{padding-top: 20px;padding-bottom: 50px;}
+    .neirong>tr:nth-child(odd){background-color: #F4F6F7;}
+    .datatitle>th{text-align: center;}
+    .table{text-align: center;}
+</style>
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li class="active"><a href="javascript:void(0)">红包统计</a></li>
+</ul>
+<div class="main">
+     
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            销售统计
+        </div>
+        <div class="panel-body" style="padding: 0px 15px;">
+            <div class="row">
+
+            <input type="hidden" value="{$storeid}" id="storeid" >
+                <div class="col-md-12">
+                <form action="" method="get" class="col-md-4">
+          <input type="hidden" name="c" value="site" />
+          <input type="hidden" name="a" value="entry" />
+          <input type="hidden" name="m" value="zh_tcwq" />
+          <input type="hidden" name="do" value="hbdata" />
+            <div class="input-group">
+                {php echo tpl_form_field_date('time');}
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-default" name="submit2" value="查找"/>
+                     <input type="hidden" name="token" value="{$_W['token']}"/>
+                       <input type="hidden" name="type" value="all"/>
+                </span>
+            </div><!-- /input-group -->
+        </form>
+                 
+                </div>
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead >
+                            <tr class="datatitle">
+                                <th class="col-md-1">排序</th>
+                                <th class="col-md-2">交易金额</th>
+                                <th class="col-md-2">交易时间</th>
+                                <th class="col-md-7"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="neirong">
+                         {loop $tzinfo  $key $row}
+                            <tr>
+                                <td class="col-md-1">{php echo $key+1}</td>
+                                {if $row['hb_random']==1}
+                                <td class="col-md-2">{$row['hb_money']}</td>
+                                {elseif $row['hb_random']==2}
+                                <td class="col-md-2">{php echo $row['hb_money']*$row['hb_num']}</td>
+                                {/if}
+                                <td class="col-md-2">{$row['time']}</td>
+                                <th class="col-md-7"></th>
+                            </tr>
+                               {/loop}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="text-right we7-margin-top">{$pager}</div>
+<!-- {template 'common/footer'} -->
+
+<script language='javascript'>
+    // $("#frame-5").addClass("in");
+    $("#frame-16").show();
+    $("#yframe-16").addClass("wyactive");
+
+
+ </script>

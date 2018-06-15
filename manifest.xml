@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="" versionCode="0.6,0.7,0.8,1.0">
+	<application setting="false">
+		<name><![CDATA[志汇-同城微圈小程序]]></name>
+		<identifie><![CDATA[zh_tcwq]]></identifie>
+		<version><![CDATA[8.4]]></version>
+		<type><![CDATA[services]]></type>
+		<ability><![CDATA[志汇-同城微圈小程序]]></ability>
+		<description><![CDATA[志汇-同城微圈小程序]]></description>
+		<author><![CDATA[左歌科技QQ：525094890]]></author>
+		<url><![CDATA[]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+		</handles>
+		<rule embed="false" />
+		<card embed="false" />
+		<supports>
+		<item type="wxapp" />
+		</supports>
+	</platform>
+	<bindings>
+	</bindings>
+	<permissions>
+	</permissions>
+	<install><![CDATA[do_install.php]]></install>
+	<uninstall><![CDATA[do_uninstall.php]]></uninstall>
+	<upgrade><![CDATA[do_upgrade.php]]></upgrade>
+</manifest>

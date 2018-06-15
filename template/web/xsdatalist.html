@@ -1,0 +1,219 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/zh_tcwq/template/public/ygcsslist.css">
+<style type="text/css">
+    .row{padding-top: 20px;padding-bottom: 50px;}
+    .neirong>tr:nth-child(odd){background-color: #F4F6F7;}
+    .datatitle>th{text-align: center;}
+    .table{text-align: center;}
+    .tmoney{font-size: 26px;margin-top: 45px;text-align: center;}
+    .today{font-size: 14px;text-align: center;margin-left: -165px;}
+    .backimg{
+        width: 71px;
+        height: 74px;
+        margin-top: 30px;
+    }
+    .yg9_content{padding:0px;}
+    .yg9_content>li>.col-md-12{
+        height: 130px;
+        box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+        border-radius: 6px;
+        overflow: hidden;
+    }    
+    .yg9_content>li:nth-child(1)>.col-md-12{
+        background-color: #32CC7F;
+        color: white;
+        /*background:url(../addons/zh_tcwq/template/images/tuceng4.png) no-repeat center;
+        background-size: 100%;*/
+    }
+    .yg9_content>li:nth-child(2)>.col-md-12{
+        background-color: #f17c67;
+        color: white;
+    }
+    .yg9_content>li:nth-child(3)>.col-md-12{
+        background-color: #99CC33;
+        color: white;
+    }
+    .yg9_content>li:nth-child(4)>.col-md-12{
+        background-color: #6C6FBF;
+        color: #fff;
+    }
+    .yg9_content>li:nth-child(5)>.col-md-12{
+        background-color: #0096E8;
+        color: white;
+    }
+    .yg9_content>li:nth-child(6)>.col-md-12{
+        background-color: #E4843E;
+        color: white;
+    }
+    .yg9_content>li:nth-child(7)>.col-md-12{
+        background-color: #17BB9A;
+        color: white;
+    }
+    .yg9_content>li:nth-child(8)>.col-md-12{
+        background-color: #f17c67;
+        color: white;
+    }
+    .yg9_content>li{
+        margin-top: 20px;
+    }
+    .tmoney{
+        margin-left: -155px !important;
+    }
+    .jyr{
+       float: left !important; 
+       position: relative !important; 
+       left: 100px !important; 
+       top:0px !important; 
+    }
+    .jylx{
+        position: relative !important; 
+       left: 220px !important; 
+    }
+    .jlzn{
+        background: #F4F6F7;
+        border-bottom: 2px solid #F4F6F7;
+    }
+    /*.table-hover{
+        border:1px solid #DADADA !important; 
+    }*/
+    .jl{
+        font-size: 18px;
+        margin-left: 20px;   
+        margin-bottom: 5px;
+    }
+    .neirong>td{
+        background-color: #fff !important;
+    }
+    .neirong>tr:nth-child(odd) {
+        background-color: #fff !important;
+    }
+    .row{
+        padding-bottom: 0px !important;
+    }
+    .table>thead>tr>th{
+        border-bottom: 2px solid #F4F6F7 !important;
+    }
+    .main{
+        font-size: 15px !important;
+    }
+    .xhx{
+        width: 50px !important;
+        border-bottom: 2px solid #fff !important;
+    }
+    .djck {
+       position: relative;
+        top: -110px;
+        left: 65px;
+    }
+</style>
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li class="active"><a href="javascript:void(0)">销售统计</a></li>
+</ul>
+<div class="main">
+     
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            销售统计
+        </div>
+        <div class="panel-body" style="padding: 0px 15px;">
+            <div class="row">
+
+            <input type="hidden" value="{$storeid}" id="storeid" >
+                <div class="col-md-12">
+                  <form action="" method="get" class="col-md-4">
+                  <input type="hidden" name="c" value="site" />
+                  <input type="hidden" name="a" value="entry" />
+                  <input type="hidden" name="m" value="zh_tcwq" />
+                  <input type="hidden" name="do" value="xsdatalist" />
+                  <input type="hidden" name="ordertype" value="{$_GPC['ordertype']}" />
+            <div class="input-group">
+                {php echo tpl_form_field_date('time',$_GPC['time']);}
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-default" name="submit2" value="查找"/>
+                     <input type="hidden" name="token" value="{$_W['token']}"/>
+                       <input type="hidden" name="type" value="all"/>
+                </span>
+            </div><!-- /input-group -->
+        </form>
+   </div>
+   <br/><br/><br/>
+
+     
+            
+                <div class="col-md-12">
+                    <!-- <div class="jl">记录</div> -->
+                    <table class="table table-hover">
+                        <thead class="jlzn">
+                            <tr class="datatitle">
+                                <th class="col-md-1">排序</th>
+                                <th class="col-md-2">交易金额</th>
+                                <th class="col-md-2">交易时间</th>
+                                {if $_GPC['ordertype']!=1}
+                                <th class="col-md-2">交易人</th>
+                                <th class="col-md-2">类型</th>
+                                {if $_GPC['ordertype']==2}
+                                <th class="col-md-2">帖子id</th>
+                                {/if}
+                                {if $_GPC['ordertype']==3}
+                                <th class="col-md-2">商家id</th>
+                                {/if}
+                                {if $_GPC['ordertype']==4}
+                                <th class="col-md-2">福利id</th>
+                                {/if}
+                                {if $_GPC['ordertype']==5}
+
+                                {/if}
+                                {if $_GPC['ordertype']==6}
+                                <th class="col-md-2">商品订单id</th>
+                                {/if}
+                                {if $_GPC['ordertype']==7}
+                                <th class="col-md-2">黄页id</th>
+                                {/if}
+                                {if $_GPC['ordertype']==8}
+                                <th class="col-md-2">拼车id</th>
+                                {/if}
+                                {/if}
+                   
+                            </tr>
+                        </thead>
+                        <tbody class="neirong">
+                         {loop $xsinfo  $key $row}
+                            <tr>
+                            {php $num=($key+1)+(($_GPC['page']-1)*$pagesize)}
+                                <td class="col-md-1">{$num}</td>
+                                <td class="col-md-2">{$row['xsmoney']}</td>
+                                <td class="col-md-2">{if $_GPC['ordertype']==6}{php echo date("Y-m-d H:i:s",$row['time'])}{else}{$row['time']}{/if}</td>
+                                {if $_GPC['ordertype']!=1}
+                                <td class="col-md-2">{$row['name']}</td>
+                                <td class="col-md-2">{if $_GPC['ordertype']==5}{$row['level_name']}{elseif $_GPC['ordertype']==6}商品订单{elseif $_GPC['ordertype']==7}黄页入驻{elseif $_GPC['ordertype']==8}发布拼车{else}{$row['note']}{/if}</td>
+                                <td class="col-md-2">{if $_GPC['ordertype']!=5}
+{$row['id']}
+                                {/if}
+                                </td>
+                                {/if}
+
+                            </tr>
+                               {/loop}
+                        </tbody>
+                    </table>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="text-right we7-margin-top">{$pager}</div>
+<!-- {template 'common/footer'} -->
+
+<script language='javascript'>
+    // $("#frame-5").addClass("in");
+    $("#frame-16").show();
+    $("#yframe-16").addClass("wyactive");
+
+
+ </script>

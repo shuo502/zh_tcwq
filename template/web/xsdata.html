@@ -1,0 +1,259 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/zh_tcwq/template/public/ygcsslist.css">
+<style type="text/css">
+    .row{padding-top: 20px;padding-bottom: 50px;}
+    .neirong>tr:nth-child(odd){background-color: #F4F6F7;}
+    .datatitle>th{text-align: center;}
+    .table{text-align: center;}
+    .tmoney{font-size: 26px;margin-top: 45px;text-align: center;}
+    .today{font-size: 14px;text-align: center;margin-left: -165px;}
+    .backimg{
+        width: 71px;
+        height: 74px;
+        margin-top: 30px;
+    }
+    .yg9_content{padding:0px;}
+    .yg9_content>li>.col-md-12{
+        height: 130px;
+        box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+        border-radius: 6px;
+        overflow: hidden;
+    }    
+    .yg9_content>li:nth-child(1)>.col-md-12{
+        background-color: #32CC7F;
+        color: white;
+        /*background:url(../addons/zh_tcwq/template/images/tuceng4.png) no-repeat center;
+        background-size: 100%;*/
+    }
+    .yg9_content>li:nth-child(2)>.col-md-12{
+        background-color: #f17c67;
+        color: white;
+    }
+    .yg9_content>li:nth-child(3)>.col-md-12{
+        background-color: #99CC33;
+        color: white;
+    }
+    .yg9_content>li:nth-child(4)>.col-md-12{
+        background-color: #6C6FBF;
+        color: #fff;
+    }
+    .yg9_content>li:nth-child(5)>.col-md-12{
+        background-color: #0096E8;
+        color: white;
+    }
+    .yg9_content>li:nth-child(6)>.col-md-12{
+        background-color: #E4843E;
+        color: white;
+    }
+    .yg9_content>li:nth-child(7)>.col-md-12{
+        background-color: #17BB9A;
+        color: white;
+    }
+    .yg9_content>li:nth-child(8)>.col-md-12{
+        background-color: #f17c67;
+        color: white;
+    }
+    .yg9_content>li{
+        margin-top: 20px;
+    }
+    .tmoney{
+        margin-left: -155px !important;
+    }
+    .jyr{
+       float: left !important; 
+       position: relative !important; 
+       left: 100px !important; 
+       top:0px !important; 
+    }
+    .jylx{
+        position: relative !important; 
+       left: 220px !important; 
+    }
+    .jlzn{
+        background: #F4F6F7;
+        border-bottom: 2px solid #F4F6F7;
+    }
+    /*.table-hover{
+        border:1px solid #DADADA !important; 
+    }*/
+    .jl{
+        font-size: 18px;
+        margin-left: 20px;   
+        margin-bottom: 5px;
+    }
+    .neirong>td{
+        background-color: #fff !important;
+    }
+    .neirong>tr:nth-child(odd) {
+        background-color: #fff !important;
+    }
+    .row{
+        padding-bottom: 0px !important;
+    }
+    .table>thead>tr>th{
+        border-bottom: 2px solid #F4F6F7 !important;
+    }
+    .main{
+        font-size: 15px !important;
+    }
+    .xhx{
+    	width: 50px !important;
+    	border-bottom: 2px solid #fff !important;
+    }
+    .djck {
+	   position: relative;
+	    top: -110px;
+	    left: 65px;
+	}
+</style>
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li class="active"><a href="javascript:void(0)">销售统计</a></li>
+</ul>
+<div class="main">
+     
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            销售统计
+        </div>
+        <div class="panel-body" style="padding: 0px 15px;">
+            <div class="row">
+
+            <input type="hidden" value="{$storeid}" id="storeid" >
+                <div class="col-md-12">
+                  <form action="" method="get" class="col-md-4">
+                  <input type="hidden" name="c" value="site" />
+                  <input type="hidden" name="a" value="entry" />
+                  <input type="hidden" name="m" value="zh_tcwq" />
+                  <input type="hidden" name="do" value="xsdata" />
+            <div class="input-group">
+             {php echo tpl_form_field_daterange('time',$_GPC['time']);}
+              
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-default" name="submit2" value="查找"/>
+                     <input type="hidden" name="token" value="{$_W['token']}"/>
+                       <input type="hidden" name="type" value="all"/>
+                </span>
+            </div><!-- /input-group -->
+        </form>
+                </div>
+
+                 <div class="panel-body">        
+                <ul class="col-md-12 yg9_content" style="margin-bottom: 10px;">
+                    <li class="col-md-3">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <img class="backimg" src="../addons/zh_tcwq/template/images/xinxi1.png">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="tmoney">¥&nbsp;{if $jrtmoney}{$jrtmoney}{else}0.00{/if}</p>
+                                <p class="today">今日销售总额</p>
+                                <a class="djck" href="{php echo $this->createWebUrl('xsdatalist',array('ordertype'=>1))}">点击查看>></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-md-3">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <img class="backimg" src="../addons/zh_tcwq/template/images/xinxi1.png">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="tmoney">¥&nbsp;{if $tzmoney['tzmoney']}{$tzmoney['tzmoney']}{else}0.00{/if}</p>
+                                <p class="today">今日帖子金额</p>
+                                <a class="djck" href="{php echo $this->createWebUrl('xsdatalist',array('ordertype'=>2))}">点击查看>></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-md-3">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <img class="backimg" src="../addons/zh_tcwq/template/images/xinxi1.png">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="tmoney">¥&nbsp;{if $storemoney['storemoney']}{$storemoney['storemoney']}{else}0.00{/if}</p>
+                                <p class="today">今日商户入驻金额</p>
+                                <a class="djck" href="{php echo $this->createWebUrl('xsdatalist',array('ordertype'=>3))}">点击查看>></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-md-3">
+                        <div class="col-md-12">
+                        <div class="col-md-6">
+                                <img class="backimg" src="../addons/zh_tcwq/template/images/xinxi1.png">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="tmoney">¥&nbsp;{if $hbmoney['hbmoney']}{$hbmoney['hbmoney']}{else}0.00{/if}</p>
+                                <p class="today">今日红包金额</p>
+                                <a class="djck" href="{php echo $this->createWebUrl('xsdatalist',array('ordertype'=>4))}">点击查看>></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-md-3">
+                        <div class="col-md-12">
+                        <div class="col-md-6">
+                                <img class="backimg" src="../addons/zh_tcwq/template/images/xinxi1.png">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="tmoney">¥&nbsp;{if $hhrmoney['hhrmoney']}{$hhrmoney['hhrmoney']}{else}0.00{/if}</p>
+                                <p class="today">今日合伙人金额</p>
+                                <a class="djck" href="{php echo $this->createWebUrl('xsdatalist',array('ordertype'=>5))}">点击查看>></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-md-3">
+                        <div class="col-md-12">
+                        <div class="col-md-6">
+                                <img class="backimg" src="../addons/zh_tcwq/template/images/xinxi1.png">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="tmoney">¥&nbsp;{if $ordermoney['ordermoney']}{$ordermoney['ordermoney']}{else}0.00{/if}</p>
+                                <p class="today">今日商品订单金额</p>
+                                <a class="djck" href="{php echo $this->createWebUrl('xsdatalist',array('ordertype'=>6))}">点击查看>></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-md-3">
+                        <div class="col-md-12">
+                        <div class="col-md-6">
+                                <img class="backimg" src="../addons/zh_tcwq/template/images/xinxi1.png">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="tmoney">¥&nbsp;{if $hymoney['hymoney']}{$hymoney['hymoney']}{else}0.00{/if}</p>
+                                <p class="today">今日114金额</p>
+                                <a class="djck" href="{php echo $this->createWebUrl('xsdatalist',array('ordertype'=>7))}">点击查看>></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-md-3">
+                        <div class="col-md-12">
+                        <div class="col-md-6">
+                                <img class="backimg" src="../addons/zh_tcwq/template/images/xinxi1.png">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="tmoney">¥&nbsp;{if $pcmoney['pcmoney']}{$pcmoney['pcmoney']}{else}0.00{/if}</p>
+                                <p class="today">今日拼车总额</p>
+                                <a class="djck" href="{php echo $this->createWebUrl('xsdatalist',array('ordertype'=>8))}">点击查看>></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+        </div>       
+                
+              
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="text-right we7-margin-top">{$pager}</div>
+<!-- {template 'common/footer'} -->
+
+<script language='javascript'>
+    // $("#frame-5").addClass("in");
+    $("#frame-16").show();
+    $("#yframe-16").addClass("wyactive");
+
+
+ </script>
