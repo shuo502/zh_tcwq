@@ -20,8 +20,12 @@ $pcmoney=pdo_fetch($sql8);
 //114入驻的钱
 $sql9=" select sum(a.money) as hymoney from".tablename('zhtc_yellowpaylog'). " a"  . " left join " . tablename("zhtc_yellowstore") . " b on a.hy_id=b.id  where a.uniacid={$_W['uniacid']} and b.cityname='{$_COOKIE['cityname']}' ";
 $hymoney=pdo_fetch($sql9); 
+
+//活动的钱
+$sql10=" select sum(a.money) as actmoney from".tablename('zhtc_joinlist'). " a"  . " left join " . tablename("zhtc_activity") . " b on a.act_id=b.id  where a.uniacid={$_W['uniacid']} and b.cityname='{$_COOKIE['cityname']}' ";
+$actmoney=pdo_fetch($sql10); 
 //总金额
-$bytmoney=$ordermoney['ordermoney']+$storemoney['storemoney']+$tzmoney['tzmoney']+$pcmoney['pcmoney']+$hymoney['hymoney'];
+$bytmoney=$ordermoney['ordermoney']+$storemoney['storemoney']+$tzmoney['tzmoney']+$pcmoney['pcmoney']+$hymoney['hymoney']+$actmoney['actmoney'];
 //本月可获得佣金
 $yjtype=pdo_get('zhtc_yjset',array('uniacid'=>$_W['uniacid']));
 if($yjtype['type']==1){

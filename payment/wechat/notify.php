@@ -54,6 +54,8 @@ for($i = 1;$i <= 3;$i++) {
 $url=substr($str,0,$n);
 
 	$order=pdo_get('zhtc_distribution',array('code'=>$logno));
+
+	$hdorder=pdo_get('zhtc_joinlist',array('code'=>$logno));
 	if($order['pay_state']==1){
 		$yjset=pdo_get('zhtc_yjset',array('uniacid'=>$uniacid));
 		if($yjset['type']==1){
@@ -66,20 +68,23 @@ $url=substr($str,0,$n);
 
 		file_get_contents("".$url."/app/index.php?i=".$order['uniacid']."&c=entry&a=wxapp&do=Fx&m=zh_tcwq&user_id=".$order['user_id']."&money=".$order['money']);//分销
 	}
-
-
-
-
-
-
-
-
-			$result = array(
-				'return_code' => 'SUCCESS',
-				'return_msg' => 'OK'
-			);
-			echo array2xml($result);
-			exit;
+	if($hdorder['state']==1){
+		 pdo_update('zhtc_activity',array('sign_num +='=>1),array('id'=>$hdorder['act_id'])); 
+		$system=pdo_get('zhtc_system',array('uniacid'=>$hdorder['uniacid']));
+		if($system['is_bm']==1){
+			pdo_update('zhtc_joinlist',array('state'=>3),array('code'=>$logno));
+		}else{
+			pdo_update('zhtc_joinlist',array('state'=>2),array('code'=>$logno));
+		}
+		file_get_contents("".$url."/app/index.php?i=".$hdorder['uniacid']."&c=entry&a=wxapp&do=Fx&m=zh_tcwq&user_id=".$hdorder['user_id']."&money=".$hdorder['money']);//分销
+		file_get_contents("".$url."/app/index.php?i=".$hdorder['uniacid']."&c=entry&a=wxapp&do=ActYj&m=zh_tcwq&act_id=".$hdorder['act_id']."&money=".$hdorder['money']);//城市佣金
+	}
+	$result = array(
+		'return_code' => 'SUCCESS',
+		'return_msg' => 'OK'
+	);
+	echo array2xml($result);
+	exit;
 	
 	}else{
 		//订单已经处理过了

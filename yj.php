@@ -39,6 +39,13 @@ public  static function getYellowCity($hy_id){
 	return $res['cityname'];
 	
 } 
+//获取黄页城市
+public  static function getActCity($act_id){
+
+	$res=pdo_get('zhtc_activity',array('id'=>$act_id),'cityname');
+	return $res['cityname'];
+	
+}
 
 //获取城市佣金设置
 
@@ -48,6 +55,7 @@ public static  function getYjSet($uniacid){
 	return  $res;
 
 }
+
 
 
 

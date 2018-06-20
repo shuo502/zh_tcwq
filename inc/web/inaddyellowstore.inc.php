@@ -30,6 +30,8 @@ if($info['imgs']){
         	$data['company_name']=$_GPC['company_name'];
         	$data['company_address']=$_GPC['company_address'];
         	$data['link_tel']=$_GPC['link_tel'];
+            $days=pdo_get('zhtc_yellowset',array('id'=>$_GPC['rz_type']));
+            $data['dq_time']=time()+60*60*24*$days['days'];
         	$data['logo']=$_GPC['logo'];
         	$data['content']=$_GPC['content'];
         	$data['coordinates']=$_GPC['op']['lat'].','.$_GPC['op']['lng'];

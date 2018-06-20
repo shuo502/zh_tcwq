@@ -37,13 +37,19 @@ if($info['imgs']){
         	$data['sort']=$_GPC['sort'];
             $data['views']=$_GPC['views'];
         	$data['rz_type']=$_GPC['rz_type'];
+            
         	$data['time_over']=2;
             $data['state']=2;
             $data['uniacid']=$_W['uniacid'];
             $data['sh_time']=time();
         	$data['type_id']=$_GPC['type_id'];
             $data['type2_id']=$_GPC['type2_id'];
+            if($_GPC['cityname']){
+              $data['cityname']=$_GPC['cityname'];  
+          }else{
             $data['cityname']=$system['cityname'];
+          }
+            
             //查找入驻天数
             $days=pdo_get('zhtc_yellowset',array('id'=>$_GPC['rz_type']));
             $data['dq_time']=time()+$days['days']*60*60*24;

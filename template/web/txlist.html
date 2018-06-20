@@ -68,16 +68,16 @@
 
                     <tr class="yg5_tr1">
 
-                        <td class="store_td1">真实姓名</td>
-                        <td>提现金额</td>
-                        <td>实际金额</td> 
-                        <td>提现方式</td>
-                        <td>提现账号</td>
-                        <td>提现类型</td>
-                        <td>申请时间</td>
-                        <td>提现时间</td>
-                        <td>提现状态</td>
-                        <td>操作</td>
+                        <td class="store_td1 col-md-1">真实姓名</td>
+                        <td class="col-md-1">提现金额</td>
+                        <td class="col-md-1">实际金额</td> 
+                        <td class="col-md-1">提现方式</td>
+                        <td class="col-md-1">提现账号</td>
+                        <td class="col-md-1">提现类型</td>
+                        <td class="col-md-1">申请时间</td>
+                        <td class="col-md-1">提现时间</td>
+                        <td class="col-md-1">提现状态</td>
+                        <td class="col-md-1">操作</td>
                     </tr>
                     {loop $list $key $item}
                     <tr class="yg5_tr2">
@@ -97,7 +97,7 @@
                          银联
                      </td>
                      {/if}
-                     <td>{$item['username']}</td>
+                     <td>{$item['username']}<br>{$item['bank']}</td>
                      {if $item['method']==1}
                       <td>
                          <span class="label label-danger">红包</span>

@@ -52,10 +52,26 @@ if($operation=='delivery'){
 	}
 }
 if($operation=='receipt'){
-	
+	$order=pdo_get('zhtc_order',array('id'=>$_GPC['id']));
    $res=pdo_update('zhtc_order',array('state'=>4,'complete_time'=>time()),array('id'=>$_GPC['id']));
 	if($res){
-
+ pdo_update('zhtc_store',array('wallet +='=>$order['money']),array('id'=>$order['store_id']));
+         $data3['store_id']=$order['store_id'];
+         $data3['money']=$order['money'];
+         $data3['note']='商品订单';
+         $data3['type']=1;
+         $data3['time']=date("Y-m-d H:i:s");
+         pdo_insert('zhtc_store_wallet',$data3);
+///////////////////////////城市佣金
+         include IA_ROOT.'/addons/zh_tcwq/yj.php';
+         $cityname=Yj::getStoreCity($order['store_id']);
+         $yjset=Yj::getYjSet($_W['uniacid']);
+         if($yjset['type']==1){
+          $money=$_GPC['money']*$yjset['typer']/100;
+        }else{
+         $money=$_GPC['money']*$yjset['sjper']/100;
+       }
+       pdo_update('zhtc_account',array('money +='=>$money),array('cityname'=>$cityname));
 // /////////////////分销/////////////////
 
 //         $set=pdo_get('zhtc_fxset',array('uniacid'=>$_W['uniacid']));

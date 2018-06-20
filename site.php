@@ -591,6 +591,15 @@ $user=pdo_fetchall($sql);
 return json_encode($user);
 }
 
+//查找用户
+public function doMobileFindUser2(){
+global $_W, $_GPC;
+$sql =" select id,name from ".tablename('zhtc_user')." where uniacid={$_W['uniacid']}  and id not in (select user_id  from" .tablename('zhtc_acthxlist')."where act_id={$_GPC['act_id']}) and  (name like '%{$_GPC['keywords']}%' || openid like '%{$_GPC['keywords']}%')";  
+$user=pdo_fetchall($sql);
+
+return json_encode($user);
+}
+
 //查找城市
 public function doMobileFindCity(){
 global $_W, $_GPC;
@@ -777,6 +786,7 @@ public function doMobileUpdNav() {
             $data2['one']=$_GPC['one'];
             $data2['integral']=$_GPC['integral'];
             $data2['is_open']=$_GPC['is_open'];
+            $data2['qd_img']=$_GPC['qd_img'];
             $data2['is_bq']=$_GPC['is_bq'];
             $data2['bq_integral']=$_GPC['bq_integral'];
             pdo_update('zhtc_signset',$data2,array('uniacid'=>$_W['uniacid']));
@@ -784,6 +794,7 @@ public function doMobileUpdNav() {
             $data2['one']=$_GPC['one'];
             $data2['integral']=$_GPC['integral'];
             $data2['is_open']=$_GPC['is_open'];
+            $data2['qd_img']=$_GPC['qd_img'];
             $data2['is_bq']=$_GPC['is_bq'];
             $data2['bq_integral']=$_GPC['bq_integral'];
             $data2['uniacid']=$_W['uniacid'];

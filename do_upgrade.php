@@ -1,5 +1,79 @@
 <?php
-pdo_query("CREATE TABLE IF NOT EXISTS `ims_zhtc_ad` (
+pdo_query("CREATE TABLE IF NOT EXISTS `ims_zhtc_account` (
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`weid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属帐号',
+`storeid` varchar(1000) NOT NULL,
+`uid` int(10) unsigned NOT NULL DEFAULT '0',
+`from_user` varchar(100) NOT NULL,
+`accountname` varchar(50) NOT NULL,
+`password` varchar(200) NOT NULL,
+`salt` varchar(10) NOT NULL,
+`pwd` varchar(50) NOT NULL,
+`mobile` varchar(20) NOT NULL,
+`email` varchar(20) NOT NULL,
+`username` varchar(50) NOT NULL,
+`pay_account` varchar(200) NOT NULL,
+`displayorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+`dateline` int(10) unsigned NOT NULL DEFAULT '0',
+`status` tinyint(1) unsigned NOT NULL DEFAULT '2' COMMENT '状态',
+`role` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '1:店长,2:店员',
+`lastvisit` int(10) unsigned NOT NULL DEFAULT '0',
+`lastip` varchar(15) NOT NULL,
+`areaid` int(10) NOT NULL DEFAULT '0' COMMENT '区域id',
+`is_admin_order` tinyint(1) unsigned NOT NULL DEFAULT '1',
+`is_notice_order` tinyint(1) unsigned NOT NULL DEFAULT '1',
+`is_notice_queue` tinyint(1) unsigned NOT NULL DEFAULT '1',
+`is_notice_service` tinyint(1) unsigned NOT NULL DEFAULT '1',
+`is_notice_boss` tinyint(1) NOT NULL DEFAULT '0',
+`remark` varchar(1000) NOT NULL COMMENT '备注',
+`lat` decimal(18,10) NOT NULL DEFAULT '0.0000000000' COMMENT '经度',
+`lng` decimal(18,10) NOT NULL DEFAULT '0.0000000000' COMMENT '纬度',
+`cityname` varchar(50) NOT NULL COMMENT '城市名称',
+`money` decimal(10,2) NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_zhtc_acthxlist` (
+`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`user_id` int(11) NOT NULL,
+`act_id` int(11) NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_zhtc_activity` (
+`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`title` varchar(50) NOT NULL COMMENT '活动标题',
+`logo` varchar(200) NOT NULL COMMENT '活动logo',
+`img` text NOT NULL COMMENT '活动轮播图',
+`details` text NOT NULL COMMENT '活动详情',
+`number` int(11) NOT NULL COMMENT '限制人数',
+`sign_num` int(11) NOT NULL COMMENT '限制人数',
+`time` varchar(20) NOT NULL COMMENT '发布时间',
+`start_time` varchar(20) NOT NULL COMMENT '开始时间',
+`end_time` varchar(20) NOT NULL COMMENT '结束时间',
+`uniacid` int(11) NOT NULL COMMENT '小程序id',
+`money` decimal(10,2) NOT NULL COMMENT '价格',
+`type_id` int(11) NOT NULL COMMENT '分类id',
+`tel` varchar(20) NOT NULL COMMENT '电话',
+`address` varchar(200) NOT NULL COMMENT '地址',
+`coordinate` varchar(50) NOT NULL COMMENT '坐标',
+`num` int(11) NOT NULL COMMENT '排序',
+`view` int(11) NOT NULL COMMENT '访问量',
+`is_bm` int(11) NOT NULL DEFAULT '1' COMMENT '1.开启2.关闭',
+`cityname` varchar(20) NOT NULL COMMENT '城市',
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_zhtc_acttype` (
+`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`type_name` varchar(20) NOT NULL,
+`num` int(11) NOT NULL,
+`uniacid` int(11) NOT NULL,
+`state` int(11) NOT NULL COMMENT '1.开启2.关闭',
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_zhtc_ad` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `title` varchar(50) NOT NULL COMMENT '轮播图标题',
 `logo` varchar(200) NOT NULL COMMENT '图片',
@@ -14,7 +88,7 @@ pdo_query("CREATE TABLE IF NOT EXISTS `ims_zhtc_ad` (
 `wb_src` varchar(300) NOT NULL,
 `state` int(4) NOT NULL DEFAULT '1',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_area` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -22,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_area` (
 `num` int(11) NOT NULL COMMENT '排序',
 `uniacid` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_car` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -51,14 +125,14 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_car` (
 `start_time2` int(11) NOT NULL,
 `cityname` varchar(50) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_car_my_tag` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `tag_id` int(11) NOT NULL COMMENT '标签id',
 `car_id` int(11) NOT NULL COMMENT '拼车ID',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_car_tag` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -66,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_car_tag` (
 `tagname` varchar(30) NOT NULL COMMENT '标签名称',
 `uniacid` varchar(11) NOT NULL COMMENT '50',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_car_top` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -75,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_car_top` (
 `uniacid` int(11) NOT NULL,
 `num` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_carpaylog` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -84,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_carpaylog` (
 `time` datetime NOT NULL,
 `uniacid` varchar(50) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_comments` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -97,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_comments` (
 `store_id` int(11) NOT NULL,
 `score` decimal(10,1) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_commission_withdrawal` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -111,8 +185,9 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_commission_withdrawal` (
 `account` varchar(100) NOT NULL,
 `tx_cost` decimal(10,2) NOT NULL COMMENT '提现金额',
 `sj_cost` decimal(10,2) NOT NULL COMMENT '实际到账金额',
+`bank` varchar(20) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_continuous` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -120,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_continuous` (
 `integral` int(11) NOT NULL COMMENT '积分',
 `uniacid` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_distribution` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -136,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_distribution` (
 `level` int(11) NOT NULL,
 `cityname` varchar(20) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_earnings` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -146,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_earnings` (
 `time` int(11) NOT NULL,
 `uniacid` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_fx` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -156,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_fx` (
 `time` int(11) NOT NULL COMMENT '时间戳',
 `uniacid` varchar(50) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_fxlevel` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -167,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_fxlevel` (
 `commission` int(11) NOT NULL COMMENT '1级佣金比例',
 `commission2` int(11) NOT NULL COMMENT '2级佣金比例',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_fxset` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -185,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_fxset` (
 `is_open` int(11) NOT NULL DEFAULT '1' COMMENT '1.开启2关闭',
 `instructions` text NOT NULL COMMENT '分销商说明',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_fxuser` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -193,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_fxuser` (
 `fx_user` int(11) NOT NULL COMMENT '二级分销',
 `time` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_goods` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -217,10 +292,10 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_goods` (
 `goods_details` text NOT NULL COMMENT '商品详细',
 `state` int(4) NOT NULL COMMENT '1待审核,2通过，3拒绝',
 `sy_num` int(11) NOT NULL COMMENT '剩余数量',
-`is_show` int(11) NOT NULL DEFAULT '1',
+`is_show` int(11) NOT NULL,
 `sales` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_goods_spec` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -228,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_goods_spec` (
 `sort` int(4) NOT NULL COMMENT '排序',
 `uniacid` varchar(50) NOT NULL COMMENT '50',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_hblq` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -238,7 +313,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_hblq` (
 `time` int(11) NOT NULL COMMENT '时间戳',
 `uniacid` varchar(50) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_help` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -248,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_help` (
 `uniacid` varchar(50) NOT NULL,
 `created_time` datetime NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_hotcity` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -257,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_hotcity` (
 `uniacid` varchar(50) NOT NULL,
 `user_id` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_in` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -266,7 +341,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_in` (
 `num` int(11) NOT NULL,
 `uniacid` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_information` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -296,12 +371,12 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_information` (
 `hong` text NOT NULL,
 `store_id` int(11) NOT NULL,
 `del` int(11) NOT NULL DEFAULT '2',
-`user_img2` varchar(200) NOT NULL,
+`user_img2` varchar(100) NOT NULL,
 `dq_time` int(11) NOT NULL,
 `cityname` varchar(50) NOT NULL,
 `hbfx_num` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_integral` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -313,7 +388,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_integral` (
 `uniacid` varchar(50) NOT NULL,
 `note` varchar(20) NOT NULL COMMENT '备注',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_jfgoods` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -332,7 +407,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_jfgoods` (
 `uniacid` int(11) NOT NULL,
 `hb_moeny` decimal(10,2) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_jfrecord` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -347,7 +422,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_jfrecord` (
 `good_name` varchar(50) NOT NULL COMMENT '商品名称',
 `good_img` varchar(100) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_jftype` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -356,14 +431,30 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_jftype` (
 `num` int(11) NOT NULL,
 `uniacid` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_zhtc_joinlist` (
+`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`user_id` int(11) NOT NULL,
+`act_id` int(11) NOT NULL,
+`time` varchar(20) NOT NULL,
+`money` decimal(10,2) NOT NULL,
+`code` varchar(100) NOT NULL,
+`form_id` varchar(100) NOT NULL,
+`state` int(11) NOT NULL COMMENT '1.待支付2.已支付3.已通过4.已核销5.已拒绝',
+`uniacid` int(11) NOT NULL,
+`user_name` varchar(20) NOT NULL,
+`user_tel` varchar(20) NOT NULL,
+`hx_time` varchar(20) NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_label` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `label_name` varchar(20) NOT NULL,
 `type2_id` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_like` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -371,14 +462,14 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_like` (
 `user_id` int(11) NOT NULL COMMENT '用户id',
 `zx_id` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_mylabel` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `label_id` int(11) NOT NULL,
 `information_id` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_nav` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -393,7 +484,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_nav` (
 `wb_src` varchar(300) NOT NULL COMMENT '外部链接',
 `state` int(4) NOT NULL DEFAULT '1' COMMENT '1内部，2外部,3跳转',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_news` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -407,7 +498,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_news` (
 `type` int(11) NOT NULL,
 `cityname` varchar(50) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_order` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -437,8 +528,10 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_order` (
 `good_num` int(11) NOT NULL,
 `is_zt` int(11) NOT NULL DEFAULT '2',
 `zt_time` varchar(20) NOT NULL,
+`kd_num` varchar(100) NOT NULL,
+`kd_name` varchar(20) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_paylog` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -448,7 +541,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_paylog` (
 `uniacid` varchar(50) NOT NULL COMMENT '50',
 `note` varchar(100) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_qbmx` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -458,7 +551,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_qbmx` (
 `time` varchar(20) NOT NULL,
 `user_id` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_share` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -466,7 +559,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_share` (
 `user_id` int(11) NOT NULL COMMENT '用户id',
 `store_id` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_signlist` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -477,7 +570,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_signlist` (
 `uniacid` int(11) NOT NULL,
 `time3` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_signset` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -488,8 +581,9 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_signset` (
 `bq_integral` int(11) NOT NULL COMMENT '补签扣除积分',
 `details` text NOT NULL COMMENT '签到说明',
 `uniacid` int(11) NOT NULL,
+`qd_img` varchar(200) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_sms` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -502,7 +596,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_sms` (
 `tid3` varchar(50) NOT NULL,
 `tpl2_id` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_spec_value` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -512,7 +606,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_spec_value` (
 `name` varchar(50) NOT NULL COMMENT '名称',
 `num` int(11) NOT NULL COMMENT '数量',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_special` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -522,7 +616,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_special` (
 `color` varchar(20) NOT NULL COMMENT '颜色',
 `uniacid` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_store` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -573,7 +667,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_store` (
 `yyzz_img` varchar(100) NOT NULL,
 `sfz_img` varchar(100) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_store_wallet` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -584,7 +678,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_store_wallet` (
 `time` varchar(20) NOT NULL,
 `tx_id` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_storepaylog` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -594,7 +688,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_storepaylog` (
 `uniacid` varchar(50) NOT NULL,
 `note` varchar(20) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_storetype` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -605,7 +699,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_storetype` (
 `money` decimal(10,2) NOT NULL,
 `state` int(4) NOT NULL DEFAULT '1',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_storetype2` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -615,7 +709,25 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_storetype2` (
 `uniacid` int(11) NOT NULL,
 `state` int(4) NOT NULL DEFAULT '1',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_zhtc_storetypead` (
+`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`title` varchar(50) NOT NULL COMMENT '轮播图标题',
+`logo` varchar(200) NOT NULL COMMENT '图片',
+`status` int(11) NOT NULL COMMENT '1.开启  2.关闭',
+`src` varchar(100) NOT NULL COMMENT '链接',
+`orderby` int(11) NOT NULL COMMENT '排序',
+`xcx_name` varchar(20) NOT NULL,
+`appid` varchar(20) NOT NULL,
+`type_id` int(11) NOT NULL,
+`type_id2` int(11) NOT NULL,
+`uniacid` int(11) NOT NULL COMMENT '小程序id',
+`cityname` varchar(50) NOT NULL COMMENT '城市名称',
+`wb_src` varchar(300) NOT NULL COMMENT '外部链接',
+`state` int(4) NOT NULL DEFAULT '1' COMMENT '1内部，2外部,3跳转',
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_system` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -641,13 +753,13 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_system` (
 `mapkey` varchar(200) NOT NULL,
 `tel` varchar(20) NOT NULL,
 `gd_key` varchar(100) NOT NULL,
-`rz_xuz` text NOT NULL,
-`ft_xuz` text NOT NULL,
-`fx_money` decimal(10,2) NOT NULL,
 `hb_sxf` int(11) NOT NULL,
 `tx_money` decimal(10,2) NOT NULL,
 `tx_sxf` int(11) NOT NULL,
 `tx_details` text NOT NULL,
+`rz_xuz` text NOT NULL,
+`ft_xuz` text NOT NULL,
+`fx_money` decimal(10,2) NOT NULL,
 `is_hhr` int(4) NOT NULL DEFAULT '2',
 `is_hbfl` int(4) NOT NULL DEFAULT '2',
 `is_zx` int(4) NOT NULL DEFAULT '2',
@@ -663,7 +775,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_system` (
 `is_openzx` int(4) NOT NULL,
 `is_hyset` int(4) NOT NULL,
 `is_tzopen` int(4) NOT NULL,
-`is_pageopen` int(4) NOT NULL,
+`is_pageopen` int(11) NOT NULL,
 `cityname` varchar(50) NOT NULL,
 `is_tel` int(4) NOT NULL DEFAULT '1',
 `tx_mode` int(4) NOT NULL DEFAULT '1',
@@ -690,14 +802,25 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_system` (
 `is_kf` int(11) NOT NULL DEFAULT '1',
 `dw_more` int(11) NOT NULL DEFAULT '2',
 `is_zxrz` int(11) NOT NULL DEFAULT '1',
-`tzmc` varchar(20) NOT NULL,
+`tzmc` varchar(20) NOT NULL DEFAULT '帖子',
 `is_dnss` int(11) NOT NULL DEFAULT '1',
 `is_vr` int(11) NOT NULL DEFAULT '1',
 `is_yysj` int(11) NOT NULL DEFAULT '1',
 `tc_img` varchar(100) NOT NULL,
 `tc_gg` varchar(100) NOT NULL,
+`hbbj_img` varchar(200) NOT NULL,
+`gs_img` text NOT NULL,
+`gs_details` text NOT NULL,
+`gs_tel` varchar(20) NOT NULL,
+`gs_time` varchar(50) NOT NULL,
+`gs_add` varchar(200) NOT NULL,
+`gs_zb` varchar(50) NOT NULL,
+`model` int(4) NOT NULL DEFAULT '1',
+`is_bm` int(11) NOT NULL DEFAULT '2',
+`zf_title` varchar(50) NOT NULL,
+`sh_time` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_top` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -706,7 +829,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_top` (
 `uniacid` int(11) NOT NULL,
 `num` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_type` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -718,7 +841,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_type` (
 `state` int(4) NOT NULL DEFAULT '1',
 `sx_money` decimal(10,2) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_type2` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -728,7 +851,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_type2` (
 `uniacid` int(11) NOT NULL,
 `state` int(4) NOT NULL DEFAULT '1',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_tzpaylog` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -738,7 +861,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_tzpaylog` (
 `uniacid` varchar(50) NOT NULL,
 `note` varchar(20) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_user` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -756,7 +879,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_user` (
 `total_score` int(11) NOT NULL,
 `day` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_userformid` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -766,7 +889,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_userformid` (
 `uniacid` varchar(50) NOT NULL,
 `openid` varchar(50) NOT NULL COMMENT 'openid',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_video` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -784,14 +907,14 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_video` (
 `num` int(11) NOT NULL COMMENT '排序',
 `fm_logo` varchar(200) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_videodz` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `user_id` int(11) NOT NULL,
 `video_id` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_videopl` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -800,7 +923,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_videopl` (
 `video_id` int(11) NOT NULL,
 `time` varchar(20) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_videotype` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -810,7 +933,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_videotype` (
 `num` int(11) NOT NULL,
 `state` int(4) NOT NULL DEFAULT '1',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_withdrawal` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -826,8 +949,9 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_withdrawal` (
 `uniacid` int(11) NOT NULL,
 `method` int(11) NOT NULL,
 `store_id` int(11) NOT NULL,
+`bank` varchar(20) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_yellowpaylog` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -836,7 +960,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_yellowpaylog` (
 `time` datetime NOT NULL,
 `uniacid` varchar(50) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_yellowset` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -845,7 +969,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_yellowset` (
 `num` int(11) NOT NULL,
 `uniacid` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_yellowstore` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -871,7 +995,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_yellowstore` (
 `dq_time` int(11) NOT NULL,
 `type2_id` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_yellowtype` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -882,7 +1006,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_yellowtype` (
 `money` decimal(10,2) NOT NULL,
 `state` int(4) NOT NULL DEFAULT '1' COMMENT '1启用,2禁用',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_yellowtype2` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -892,7 +1016,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_yellowtype2` (
 `uniacid` int(11) NOT NULL,
 `state` int(4) NOT NULL DEFAULT '1' COMMENT '1启用,2禁用',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_yjset` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -904,7 +1028,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_yjset` (
 `tzper` varchar(10) NOT NULL COMMENT '帖子比例',
 `uniacid` varchar(50) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_yjtx` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -921,7 +1045,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_yjtx` (
 `time` datetime NOT NULL COMMENT '审核时间',
 `is_del` int(4) NOT NULL DEFAULT '1' COMMENT '1正常,2删除',
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_zx` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -939,7 +1063,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_zx` (
 `type` int(4) NOT NULL,
 `cityname` varchar(50) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_zx_assess` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -954,7 +1078,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_zx_assess` (
 `reply` text NOT NULL,
 `reply_time` datetime NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_zx_type` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -964,7 +1088,7 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_zx_type` (
 `time` datetime NOT NULL COMMENT '时间',
 `uniacid` varchar(50) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ims_zhtc_zx_zj` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -973,9 +1097,299 @@ CREATE TABLE IF NOT EXISTS `ims_zhtc_zx_zj` (
 `uniacid` varchar(50) NOT NULL,
 `time` int(11) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ");
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'id')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `id` int(10) unsigned NOT NULL AUTO_INCREMENT;");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'weid')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `weid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属帐号';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'storeid')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `storeid` varchar(1000) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'uid')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `uid` int(10) unsigned NOT NULL DEFAULT '0';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'from_user')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `from_user` varchar(100) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'accountname')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `accountname` varchar(50) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'password')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `password` varchar(200) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'salt')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `salt` varchar(10) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'pwd')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `pwd` varchar(50) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'mobile')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `mobile` varchar(20) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'email')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `email` varchar(20) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'username')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `username` varchar(50) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'pay_account')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `pay_account` varchar(200) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'displayorder')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `displayorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'dateline')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `dateline` int(10) unsigned NOT NULL DEFAULT '0';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'status')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `status` tinyint(1) unsigned NOT NULL DEFAULT '2' COMMENT '状态';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'role')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `role` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '1:店长,2:店员';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'lastvisit')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `lastvisit` int(10) unsigned NOT NULL DEFAULT '0';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'lastip')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `lastip` varchar(15) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'areaid')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `areaid` int(10) NOT NULL DEFAULT '0' COMMENT '区域id';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'is_admin_order')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `is_admin_order` tinyint(1) unsigned NOT NULL DEFAULT '1';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'is_notice_order')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `is_notice_order` tinyint(1) unsigned NOT NULL DEFAULT '1';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'is_notice_queue')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `is_notice_queue` tinyint(1) unsigned NOT NULL DEFAULT '1';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'is_notice_service')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `is_notice_service` tinyint(1) unsigned NOT NULL DEFAULT '1';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'is_notice_boss')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `is_notice_boss` tinyint(1) NOT NULL DEFAULT '0';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'remark')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `remark` varchar(1000) NOT NULL COMMENT '备注';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'lat')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `lat` decimal(18,10) NOT NULL DEFAULT '0.0000000000' COMMENT '经度';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'lng')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `lng` decimal(18,10) NOT NULL DEFAULT '0.0000000000' COMMENT '纬度';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'cityname')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `cityname` varchar(50) NOT NULL COMMENT '城市名称';");
+	}	
+}
+if(pdo_tableexists('zhtc_account')) {
+	if(!pdo_fieldexists('zhtc_account',  'money')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_account')." ADD `money` decimal(10,2) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_acthxlist')) {
+	if(!pdo_fieldexists('zhtc_acthxlist',  'id')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_acthxlist')." ADD `id` int(11) unsigned NOT NULL AUTO_INCREMENT;");
+	}	
+}
+if(pdo_tableexists('zhtc_acthxlist')) {
+	if(!pdo_fieldexists('zhtc_acthxlist',  'user_id')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_acthxlist')." ADD `user_id` int(11) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_acthxlist')) {
+	if(!pdo_fieldexists('zhtc_acthxlist',  'act_id')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_acthxlist')." ADD `act_id` int(11) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'id')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `id` int(11) unsigned NOT NULL AUTO_INCREMENT;");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'title')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `title` varchar(50) NOT NULL COMMENT '活动标题';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'logo')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `logo` varchar(200) NOT NULL COMMENT '活动logo';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'img')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `img` text NOT NULL COMMENT '活动轮播图';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'details')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `details` text NOT NULL COMMENT '活动详情';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'number')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `number` int(11) NOT NULL COMMENT '限制人数';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'sign_num')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `sign_num` int(11) NOT NULL COMMENT '限制人数';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'time')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `time` varchar(20) NOT NULL COMMENT '发布时间';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'start_time')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `start_time` varchar(20) NOT NULL COMMENT '开始时间';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'end_time')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `end_time` varchar(20) NOT NULL COMMENT '结束时间';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'uniacid')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `uniacid` int(11) NOT NULL COMMENT '小程序id';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'money')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `money` decimal(10,2) NOT NULL COMMENT '价格';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'type_id')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `type_id` int(11) NOT NULL COMMENT '分类id';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'tel')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `tel` varchar(20) NOT NULL COMMENT '电话';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'address')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `address` varchar(200) NOT NULL COMMENT '地址';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'coordinate')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `coordinate` varchar(50) NOT NULL COMMENT '坐标';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'num')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `num` int(11) NOT NULL COMMENT '排序';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'view')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `view` int(11) NOT NULL COMMENT '访问量';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'is_bm')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `is_bm` int(11) NOT NULL DEFAULT '1' COMMENT '1.开启2.关闭';");
+	}	
+}
+if(pdo_tableexists('zhtc_activity')) {
+	if(!pdo_fieldexists('zhtc_activity',  'cityname')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_activity')." ADD `cityname` varchar(20) NOT NULL COMMENT '城市';");
+	}	
+}
+if(pdo_tableexists('zhtc_acttype')) {
+	if(!pdo_fieldexists('zhtc_acttype',  'id')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_acttype')." ADD `id` int(11) unsigned NOT NULL AUTO_INCREMENT;");
+	}	
+}
+if(pdo_tableexists('zhtc_acttype')) {
+	if(!pdo_fieldexists('zhtc_acttype',  'type_name')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_acttype')." ADD `type_name` varchar(20) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_acttype')) {
+	if(!pdo_fieldexists('zhtc_acttype',  'num')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_acttype')." ADD `num` int(11) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_acttype')) {
+	if(!pdo_fieldexists('zhtc_acttype',  'uniacid')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_acttype')." ADD `uniacid` int(11) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_acttype')) {
+	if(!pdo_fieldexists('zhtc_acttype',  'state')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_acttype')." ADD `state` int(11) NOT NULL COMMENT '1.开启2.关闭';");
+	}	
+}
 if(pdo_tableexists('zhtc_ad')) {
 	if(!pdo_fieldexists('zhtc_ad',  'id')) {
 		pdo_query("ALTER TABLE ".tablename('zhtc_ad')." ADD `id` int(11) NOT NULL AUTO_INCREMENT;");
@@ -1371,6 +1785,11 @@ if(pdo_tableexists('zhtc_commission_withdrawal')) {
 		pdo_query("ALTER TABLE ".tablename('zhtc_commission_withdrawal')." ADD `sj_cost` decimal(10,2) NOT NULL COMMENT '实际到账金额';");
 	}	
 }
+if(pdo_tableexists('zhtc_commission_withdrawal')) {
+	if(!pdo_fieldexists('zhtc_commission_withdrawal',  'bank')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_commission_withdrawal')." ADD `bank` varchar(20) NOT NULL;");
+	}	
+}
 if(pdo_tableexists('zhtc_continuous')) {
 	if(!pdo_fieldexists('zhtc_continuous',  'id')) {
 		pdo_query("ALTER TABLE ".tablename('zhtc_continuous')." ADD `id` int(11) unsigned NOT NULL AUTO_INCREMENT;");
@@ -1743,7 +2162,7 @@ if(pdo_tableexists('zhtc_goods')) {
 }
 if(pdo_tableexists('zhtc_goods')) {
 	if(!pdo_fieldexists('zhtc_goods',  'is_show')) {
-		pdo_query("ALTER TABLE ".tablename('zhtc_goods')." ADD `is_show` int(11) NOT NULL DEFAULT '1';");
+		pdo_query("ALTER TABLE ".tablename('zhtc_goods')." ADD `is_show` int(11) NOT NULL;");
 	}	
 }
 if(pdo_tableexists('zhtc_goods')) {
@@ -2018,7 +2437,7 @@ if(pdo_tableexists('zhtc_information')) {
 }
 if(pdo_tableexists('zhtc_information')) {
 	if(!pdo_fieldexists('zhtc_information',  'user_img2')) {
-		pdo_query("ALTER TABLE ".tablename('zhtc_information')." ADD `user_img2` varchar(200) NOT NULL;");
+		pdo_query("ALTER TABLE ".tablename('zhtc_information')." ADD `user_img2` varchar(100) NOT NULL;");
 	}	
 }
 if(pdo_tableexists('zhtc_information')) {
@@ -2229,6 +2648,66 @@ if(pdo_tableexists('zhtc_jftype')) {
 if(pdo_tableexists('zhtc_jftype')) {
 	if(!pdo_fieldexists('zhtc_jftype',  'uniacid')) {
 		pdo_query("ALTER TABLE ".tablename('zhtc_jftype')." ADD `uniacid` int(11) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_joinlist')) {
+	if(!pdo_fieldexists('zhtc_joinlist',  'id')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_joinlist')." ADD `id` int(11) unsigned NOT NULL AUTO_INCREMENT;");
+	}	
+}
+if(pdo_tableexists('zhtc_joinlist')) {
+	if(!pdo_fieldexists('zhtc_joinlist',  'user_id')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_joinlist')." ADD `user_id` int(11) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_joinlist')) {
+	if(!pdo_fieldexists('zhtc_joinlist',  'act_id')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_joinlist')." ADD `act_id` int(11) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_joinlist')) {
+	if(!pdo_fieldexists('zhtc_joinlist',  'time')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_joinlist')." ADD `time` varchar(20) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_joinlist')) {
+	if(!pdo_fieldexists('zhtc_joinlist',  'money')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_joinlist')." ADD `money` decimal(10,2) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_joinlist')) {
+	if(!pdo_fieldexists('zhtc_joinlist',  'code')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_joinlist')." ADD `code` varchar(100) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_joinlist')) {
+	if(!pdo_fieldexists('zhtc_joinlist',  'form_id')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_joinlist')." ADD `form_id` varchar(100) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_joinlist')) {
+	if(!pdo_fieldexists('zhtc_joinlist',  'state')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_joinlist')." ADD `state` int(11) NOT NULL COMMENT '1.待支付2.已支付3.已通过4.已核销5.已拒绝';");
+	}	
+}
+if(pdo_tableexists('zhtc_joinlist')) {
+	if(!pdo_fieldexists('zhtc_joinlist',  'uniacid')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_joinlist')." ADD `uniacid` int(11) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_joinlist')) {
+	if(!pdo_fieldexists('zhtc_joinlist',  'user_name')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_joinlist')." ADD `user_name` varchar(20) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_joinlist')) {
+	if(!pdo_fieldexists('zhtc_joinlist',  'user_tel')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_joinlist')." ADD `user_tel` varchar(20) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_joinlist')) {
+	if(!pdo_fieldexists('zhtc_joinlist',  'hx_time')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_joinlist')." ADD `hx_time` varchar(20) NOT NULL;");
 	}	
 }
 if(pdo_tableexists('zhtc_label')) {
@@ -2521,6 +3000,16 @@ if(pdo_tableexists('zhtc_order')) {
 		pdo_query("ALTER TABLE ".tablename('zhtc_order')." ADD `zt_time` varchar(20) NOT NULL;");
 	}	
 }
+if(pdo_tableexists('zhtc_order')) {
+	if(!pdo_fieldexists('zhtc_order',  'kd_num')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_order')." ADD `kd_num` varchar(100) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_order')) {
+	if(!pdo_fieldexists('zhtc_order',  'kd_name')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_order')." ADD `kd_name` varchar(20) NOT NULL;");
+	}	
+}
 if(pdo_tableexists('zhtc_paylog')) {
 	if(!pdo_fieldexists('zhtc_paylog',  'id')) {
 		pdo_query("ALTER TABLE ".tablename('zhtc_paylog')." ADD `id` int(11) NOT NULL AUTO_INCREMENT;");
@@ -2674,6 +3163,11 @@ if(pdo_tableexists('zhtc_signset')) {
 if(pdo_tableexists('zhtc_signset')) {
 	if(!pdo_fieldexists('zhtc_signset',  'uniacid')) {
 		pdo_query("ALTER TABLE ".tablename('zhtc_signset')." ADD `uniacid` int(11) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_signset')) {
+	if(!pdo_fieldexists('zhtc_signset',  'qd_img')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_signset')." ADD `qd_img` varchar(200) NOT NULL;");
 	}	
 }
 if(pdo_tableexists('zhtc_sms')) {
@@ -3146,6 +3640,76 @@ if(pdo_tableexists('zhtc_storetype2')) {
 		pdo_query("ALTER TABLE ".tablename('zhtc_storetype2')." ADD `state` int(4) NOT NULL DEFAULT '1';");
 	}	
 }
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'id')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `id` int(11) unsigned NOT NULL AUTO_INCREMENT;");
+	}	
+}
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'title')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `title` varchar(50) NOT NULL COMMENT '轮播图标题';");
+	}	
+}
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'logo')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `logo` varchar(200) NOT NULL COMMENT '图片';");
+	}	
+}
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'status')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `status` int(11) NOT NULL COMMENT '1.开启  2.关闭';");
+	}	
+}
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'src')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `src` varchar(100) NOT NULL COMMENT '链接';");
+	}	
+}
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'orderby')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `orderby` int(11) NOT NULL COMMENT '排序';");
+	}	
+}
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'xcx_name')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `xcx_name` varchar(20) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'appid')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `appid` varchar(20) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'type_id')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `type_id` int(11) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'type_id2')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `type_id2` int(11) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'uniacid')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `uniacid` int(11) NOT NULL COMMENT '小程序id';");
+	}	
+}
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'cityname')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `cityname` varchar(50) NOT NULL COMMENT '城市名称';");
+	}	
+}
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'wb_src')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `wb_src` varchar(300) NOT NULL COMMENT '外部链接';");
+	}	
+}
+if(pdo_tableexists('zhtc_storetypead')) {
+	if(!pdo_fieldexists('zhtc_storetypead',  'state')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_storetypead')." ADD `state` int(4) NOT NULL DEFAULT '1' COMMENT '1内部，2外部,3跳转';");
+	}	
+}
 if(pdo_tableexists('zhtc_system')) {
 	if(!pdo_fieldexists('zhtc_system',  'id')) {
 		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `id` int(11) NOT NULL AUTO_INCREMENT;");
@@ -3262,21 +3826,6 @@ if(pdo_tableexists('zhtc_system')) {
 	}	
 }
 if(pdo_tableexists('zhtc_system')) {
-	if(!pdo_fieldexists('zhtc_system',  'rz_xuz')) {
-		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `rz_xuz` text NOT NULL;");
-	}	
-}
-if(pdo_tableexists('zhtc_system')) {
-	if(!pdo_fieldexists('zhtc_system',  'ft_xuz')) {
-		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `ft_xuz` text NOT NULL;");
-	}	
-}
-if(pdo_tableexists('zhtc_system')) {
-	if(!pdo_fieldexists('zhtc_system',  'fx_money')) {
-		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `fx_money` decimal(10,2) NOT NULL;");
-	}	
-}
-if(pdo_tableexists('zhtc_system')) {
 	if(!pdo_fieldexists('zhtc_system',  'hb_sxf')) {
 		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `hb_sxf` int(11) NOT NULL;");
 	}	
@@ -3294,6 +3843,21 @@ if(pdo_tableexists('zhtc_system')) {
 if(pdo_tableexists('zhtc_system')) {
 	if(!pdo_fieldexists('zhtc_system',  'tx_details')) {
 		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `tx_details` text NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'rz_xuz')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `rz_xuz` text NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'ft_xuz')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `ft_xuz` text NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'fx_money')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `fx_money` decimal(10,2) NOT NULL;");
 	}	
 }
 if(pdo_tableexists('zhtc_system')) {
@@ -3373,7 +3937,7 @@ if(pdo_tableexists('zhtc_system')) {
 }
 if(pdo_tableexists('zhtc_system')) {
 	if(!pdo_fieldexists('zhtc_system',  'is_pageopen')) {
-		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `is_pageopen` int(4) NOT NULL;");
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `is_pageopen` int(11) NOT NULL;");
 	}	
 }
 if(pdo_tableexists('zhtc_system')) {
@@ -3508,7 +4072,7 @@ if(pdo_tableexists('zhtc_system')) {
 }
 if(pdo_tableexists('zhtc_system')) {
 	if(!pdo_fieldexists('zhtc_system',  'tzmc')) {
-		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `tzmc` varchar(20) NOT NULL;");
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `tzmc` varchar(20) NOT NULL DEFAULT '帖子';");
 	}	
 }
 if(pdo_tableexists('zhtc_system')) {
@@ -3534,6 +4098,61 @@ if(pdo_tableexists('zhtc_system')) {
 if(pdo_tableexists('zhtc_system')) {
 	if(!pdo_fieldexists('zhtc_system',  'tc_gg')) {
 		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `tc_gg` varchar(100) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'hbbj_img')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `hbbj_img` varchar(200) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'gs_img')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `gs_img` text NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'gs_details')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `gs_details` text NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'gs_tel')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `gs_tel` varchar(20) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'gs_time')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `gs_time` varchar(50) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'gs_add')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `gs_add` varchar(200) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'gs_zb')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `gs_zb` varchar(50) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'model')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `model` int(4) NOT NULL DEFAULT '1';");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'is_bm')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `is_bm` int(11) NOT NULL DEFAULT '2';");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'zf_title')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `zf_title` varchar(50) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_system')) {
+	if(!pdo_fieldexists('zhtc_system',  'sh_time')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_system')." ADD `sh_time` int(11) NOT NULL;");
 	}	
 }
 if(pdo_tableexists('zhtc_top')) {
@@ -3964,6 +4583,11 @@ if(pdo_tableexists('zhtc_withdrawal')) {
 if(pdo_tableexists('zhtc_withdrawal')) {
 	if(!pdo_fieldexists('zhtc_withdrawal',  'store_id')) {
 		pdo_query("ALTER TABLE ".tablename('zhtc_withdrawal')." ADD `store_id` int(11) NOT NULL;");
+	}	
+}
+if(pdo_tableexists('zhtc_withdrawal')) {
+	if(!pdo_fieldexists('zhtc_withdrawal',  'bank')) {
+		pdo_query("ALTER TABLE ".tablename('zhtc_withdrawal')." ADD `bank` varchar(20) NOT NULL;");
 	}	
 }
 if(pdo_tableexists('zhtc_yellowpaylog')) {

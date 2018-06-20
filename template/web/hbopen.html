@@ -97,6 +97,37 @@
                         <div class="help-block">*是否开启红包转发，选择关闭状态，红包福利则可直接领取</div>
                     </div>
                 </div>
+
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">红包手续费(%)</label>
+                    <div class="col-sm-9">
+                       <input type="number" name="hb_sxf"  class="form-control" value="{$item['hb_sxf']}" />
+                       <div class="help-block">*发布帖子中，发红包、置顶等所提取的手续费，0或不填则不收取该费用</div>
+                    </div>
+                </div>
+                
+               <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">红包分享群内容设置</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="hb_content" value="{$item['hb_content']}" id="review_user" class="form-control" />
+                        <div class="help-block">*tyep为分享的帖子所属的分类,name为分享者用户昵称,例如:type,红包来袭,name邀请你赶快来抢吧！</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">红包转发背景图片</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_form_field_image('hb_img', $item['hb_img'])}
+                        <span class="help-block">*建议比例 100*100px</span>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">福利页面背景图</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_form_field_image('hbbj_img', $item['hbbj_img'])}
+                        <span class="help-block">*建议比例 100*100px</span>
+                    </div>
+                </div>
                                                
             </div>
 

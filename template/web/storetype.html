@@ -91,82 +91,22 @@
                             <td class="num{$row['id']}">
                                 <span class="numspan{$row['id']}">{$row['num']}</span>
                                 <input style="display: none;width: 100%;" type="number" name="num{$row['id']}" class="numinp{$row['id']}" value="{$row['num']}" />
-                               <!--  <script type="text/javascript">
-                                    $(function(){
-                                        $(".num{$row['id']}").each(function(index){
-                                             $(this).dblclick(function(){
-                                                $(".numinp{$row['id']}").eq(index).show().focus();
-                                                $(".numspan{$row['id']}").eq(index).hide();                                         
-                                            });
-                                        });
-                                        $(".numinp{$row['id']}").each(function(index){
-                                            $(this).blur(function(){            
-                                                $(".numinp{$row['id']}").eq(index).hide();
-                                                $(".numspan{$row['id']}").eq(index).show();
-                                                var text = $(".numspan{$row['id']}").html();
-                                                var inp = $(" input[ name='num{$row['id']}' ] ").val();
-                                                $(".numspan{$row['id']}").html(inp);
-                                                console.log(inp);
-                                                id = {$row['id']};
-                                                num = inp;
-                                                $.ajax({
-                                                    type:"post",
-                                                    url:"{$_W['siteroot']}/app/index.php?i={$_W['uniacid']}&c=entry&do=UpdType2&m=zh_tcwq",
-                                                    dataType:"text",
-                                                    data:{id:id,num:num},
-                                                    success:function(data){
-                                                        console.log(data);
-                                                    }
-                                                })
-                                        
-                                            });
-                                        });
-                                    })
-                                </script> -->
+                    
                             </td>
                             <td>{$row['id']}</td>
                             <td>
                                 <img class="store_list_img" src="{media  $row['img']}" alt=""/>                                
                             </td>
                             <td>{$row['type_name']}</td>
-                           <!--  <td class="money{$row['id']}">
-                               <span class="moneyspan{$row['id']}">{$row['money']}</span>
-                               <input style="display: none;width: 100%;" type="text" name="money{$row['id']}" class="moneyinp{$row['id']}" value="{$row['money']}" />
-                               <script type="text/javascript">
-                                   $(function(){
-                                       $(".money{$row['id']}").each(function(index){
-                                            $(this).dblclick(function(){
-                                               $(".moneyinp{$row['id']}").eq(index).show().focus();
-                                               $(".moneyspan{$row['id']}").eq(index).hide();                                           
-                                           });
-                                       });
-                                       $(".moneyinp{$row['id']}").each(function(index){
-                                           $(this).blur(function(){            
-                                               $(".moneyinp{$row['id']}").eq(index).hide();
-                                               $(".moneyspan{$row['id']}").eq(index).show();
-                                               var text = $(".moneyspan{$row['id']}").html();
-                                               var inp = $(" input[ name='money{$row['id']}' ] ").val();
-                                               $(".moneyspan{$row['id']}").html(inp);
-                                               // console.log(inp);
-                                               id = {$row['id']};
-                                               money = inp;
-                                               $.ajax({
-                                                   type:"post",
-                                                   url:"{$_W['siteroot']}/app/index.php?i={$_W['uniacid']}&c=entry&do=UpdType2&m=zh_dianc",
-                                                   dataType:"text",
-                                                   data:{id:id,money:money},
-                                                   success:function(data){
-                                                       console.log(data);
-                                                   }
-                                               })
-                                       
-                                           });
-                                       });
-                                   })
-                               </script>
-                           </td> -->
+
                              <td>{if $row['state']==1} <span class="label storeblue">  <a href="{php echo $this->createWebUrl('storetype', array('id' => $row['id'],'op'=>change,'state'=>2))}"   >启用</a></span>{elseif $row['state']==2} <span class="label storegrey"><a href="{php echo $this->createWebUrl('storetype', array('id' => $row['id'],'op'=>change,'state'=>1))}">禁用</a></span>{/if}</td>
                             <td>
+                                <a href="{php echo $this->createWebUrl('addstoretypead', array('type_id' => $row['id'],'type'=>1))}" class="storespan btn btn-xs">
+                                        <span class="fa fa-file-image-o"></span>
+                                        <span class="bianji" style="left: -30px;">添加轮播图
+                                            <span class="arrowdown"></span>
+                                        </span>                            
+                                    </a>
                                 <a href="{php echo $this->createWebUrl('addstoretype2', array('type_id' => $row['id']))}" class="storespan btn btn-xs">
                                         <span class="fa fa-plus"></span>
                                         <span class="bianji" style="left: -30px;">添加二级分类
@@ -225,6 +165,12 @@
                                 <td style="text-align: left;">--{$son['name']}</td>
                                  <td>{if $son['state']==1} <span class="label storeblue">  <a href="{php echo $this->createWebUrl('storetype', array('id' => $son['id'],'op'=>change2,'state'=>2))}"   >启用</a></span>{elseif $son['state']==2} <span class="label storegrey"><a href="{php echo $this->createWebUrl('storetype', array('id' => $son['id'],'op'=>change2,'state'=>1))}">禁用</a></span>{/if}</td>
                                 <td>
+                                 <a href="{php echo $this->createWebUrl('addstoretypead', array('type_id' => $son['id'],'type'=>2))}" class="storespan btn btn-xs">
+                                        <span class="fa fa-file-image-o"></span>
+                                        <span class="bianji" style="left: -30px;">添加轮播图
+                                            <span class="arrowdown"></span>
+                                        </span>                            
+                                    </a> 
                                     <a href="{php echo $this->createWebUrl('addstoretype2', array('id' => $son['id']))}" class="storespan btn btn-xs">
                                         <span class="fa fa-pencil"></span>
                                         <span class="bianji">编辑

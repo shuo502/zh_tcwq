@@ -48,6 +48,8 @@ if($operation=='delete'){
      $id=$_GPC['id'];
      $res=pdo_delete('zhtc_distribution',array('id'=>$id));
     if($res){
+      pdo_delete('zhtc_fxuser',array('user_id'=>$id));
+      pdo_delete('zhtc_fxuser',array('fx_user'=>$id));
         message('删除成功',$this->createWebUrl('fxlist',array()),'success');
     }else{
         message('删除失败','','error');

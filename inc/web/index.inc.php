@@ -1,6 +1,12 @@
 <?php
 global $_GPC, $_W;
 $GLOBALS['frames'] = $this->getMainMenu();
+//fh_time
+$time=time()-$system['sh_time']*24*60*60;
+$system=pdo_get('zhtc_system',array('uniacid'=>$_W['uniacid']));
+if($system['sh_time']>0){
+	pdo_update('zhtc_order',array('state'=>4),array('state'=>3,'fh_time <='=>$time,'uniacid'=>$_W['uniacid']));
+}
 
 //会员信息
 $time=date("Y-m-d");

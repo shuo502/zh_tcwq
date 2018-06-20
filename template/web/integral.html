@@ -329,8 +329,14 @@
                                 </div>
                                 <input type="hidden" name="">
                             </div>
-                        </table>
-                        
+                        </table>   
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-1 control-label">签到页背景图片</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_form_field_image('qd_img', $res3['qd_img'])}
+                        <span class="help-block">*建议宽高2:1</span>
                     </div>
                 </div>
             
@@ -386,6 +392,7 @@
         // ———————————点击提交传输数据———————————
         $("input[name='button']").click(function(){
           var list = [];
+           var qd_img = $("input[name='qd_img']").val();
           var color = $(".row>.col-sm-8>.input-group>input").val();
           var datetime = $(".datetime>input").val();
           var title = $(".titleinp").val();
@@ -416,6 +423,7 @@
                 one:one,
                 integral:integral3,
                 is_open:is_open,
+                qd_img:qd_img,
                 is_bq:is_bq,
                 integral2:integral2,
               },

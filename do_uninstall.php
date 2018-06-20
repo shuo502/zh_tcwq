@@ -1,5 +1,9 @@
 <?php
-pdo_query("DROP TABLE IF EXISTS `ims_zhtc_ad`;
+pdo_query("DROP TABLE IF EXISTS `ims_zhtc_account`;
+DROP TABLE IF EXISTS `ims_zhtc_acthxlist`;
+DROP TABLE IF EXISTS `ims_zhtc_activity`;
+DROP TABLE IF EXISTS `ims_zhtc_acttype`;
+DROP TABLE IF EXISTS `ims_zhtc_ad`;
 DROP TABLE IF EXISTS `ims_zhtc_area`;
 DROP TABLE IF EXISTS `ims_zhtc_car`;
 DROP TABLE IF EXISTS `ims_zhtc_car_my_tag`;
@@ -26,6 +30,7 @@ DROP TABLE IF EXISTS `ims_zhtc_integral`;
 DROP TABLE IF EXISTS `ims_zhtc_jfgoods`;
 DROP TABLE IF EXISTS `ims_zhtc_jfrecord`;
 DROP TABLE IF EXISTS `ims_zhtc_jftype`;
+DROP TABLE IF EXISTS `ims_zhtc_joinlist`;
 DROP TABLE IF EXISTS `ims_zhtc_label`;
 DROP TABLE IF EXISTS `ims_zhtc_like`;
 DROP TABLE IF EXISTS `ims_zhtc_mylabel`;
@@ -45,6 +50,7 @@ DROP TABLE IF EXISTS `ims_zhtc_store_wallet`;
 DROP TABLE IF EXISTS `ims_zhtc_storepaylog`;
 DROP TABLE IF EXISTS `ims_zhtc_storetype`;
 DROP TABLE IF EXISTS `ims_zhtc_storetype2`;
+DROP TABLE IF EXISTS `ims_zhtc_storetypead`;
 DROP TABLE IF EXISTS `ims_zhtc_system`;
 DROP TABLE IF EXISTS `ims_zhtc_top`;
 DROP TABLE IF EXISTS `ims_zhtc_type`;

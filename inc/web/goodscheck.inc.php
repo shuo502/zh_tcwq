@@ -3,7 +3,8 @@ global $_GPC, $_W;
 $GLOBALS['frames'] = $this->getMainMenu();
 $item=pdo_get('zhtc_system',array('uniacid'=>$_W['uniacid']));
 if(checksubmit('submit')){           
-    $data['is_goods']=$_GPC['is_goods'];         
+    $data['is_goods']=$_GPC['is_goods'];
+    $data['sh_time']=$_GPC['sh_time'];         
     $data['uniacid']=$_W['uniacid'];    
     if($_GPC['id']==''){                
         $res=pdo_insert('zhtc_system',$data);

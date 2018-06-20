@@ -1,0 +1,76 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/zh_tcwq/template/public/ygcsslist.css">
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li {if $_GPC['type']=='now'} class="active" {/if}><a href="{php echo $this->createWebUrl('joinlist',array('type'=>now,'act_id' => $_GPC['act_id']));}">待审核</a></li>
+    <li {if $_GPC['type']=='all'} class="active" {/if}><a href="{php echo $this->createWebUrl('joinlist',array('type'=>all,'act_id' => $_GPC['act_id']));}">全部</a></li>
+</ul>
+<div class="main">   
+    </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                报名列表
+            </div>
+            <div class="panel-body" style="padding: 0px 15px;">
+                <div class="row">
+                    <table class="yg5_tabel col-md-12">
+                        <tr class="yg5_tr1">
+                            <td class="store_td1 col-md-1">姓名</td>
+                            <td class="col-md-1">电话</td>
+                            <td class="col-md-1">金额</td>
+                            <td class="col-md-1">报名时间</td>
+                            <td class="col-md-1">状态</td>
+                            <td class="col-md-1">操作</td>
+                        </tr>
+                        {loop $list $row}
+                        <tr class="yg5_tr2">
+                            <td>{$row['user_name']}</td>
+                            <td>{$row['user_tel']}</td>
+                            <td>{$row['money']}</td>
+                            <td>{$row['time']}</td>
+                            <td>{if $row['state']==2} <span class="label storered">待审核</span>{elseif $row['state']==3} <span class="label storeblue">审核通过</span>{elseif $row['state']==5} <span class="label storegrey">审核拒绝</span>{elseif $row['state']==4} <span class="label storeblue">已完成</span>{/if}</td>
+                            <td>
+                           {if $row['state']==2} 
+                           <a href="{php echo $this->createWebUrl('joinlist',array('act_id' => $_GPC['act_id'],'op'=>'tg','id'=>$row['id']));}"><span class="label storeblue">通过</span></a>
+                           <a href="{php echo $this->createWebUrl('joinlist',array('act_id' => $_GPC['act_id'],'op'=>'jj','id'=>$row['id']));}"><span class="label storered">拒绝</span></a>
+                           {/if}
+                                <a href="javascript:void(0);" class="storespan btn btn-xs" data-toggle="modal" data-target="#myModal{$row['id']}">
+                                    <span class="fa fa-trash-o"></span>
+                                    <span class="bianji">删除
+                                        <span class="arrowdown"></span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                         <div class="modal fade" id="myModal{$row['id']}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel" style="font-size: 20px;">提示</h4>
+                        </div>
+                        <div class="modal-body" style="font-size: 20px">
+                            确定删除么？
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <a href="{php echo $this->createWebUrl('joinlist', array('id' => $row['id'],'op'=>'delete','act_id' => $_GPC['act_id']))}" type="button" class="btn btn-info" >确定</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                {/loop}
+                    </table>
+                </div>
+            </div>
+        </div>
+    {$pager}
+</div>
+<script type="text/javascript">
+    $(function(){
+        $("#frame-20").show();
+        $("#yframe-20").addClass("wyactive");    
+    })
+</script>

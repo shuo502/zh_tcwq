@@ -71,11 +71,11 @@
                     <label for="lastname" class="col-sm-2 control-label">状态</label>
                     <div class="col-sm-10">
                          <label class="radio-inline">
-                            <input type="radio" id="emailwy1" name="state" value="1" {if $item['state']==1 || empty($item['state'])}checked{/if} />
+                            <input type="radio" id="emailwy1" name="state" value="1" {if $info['state']==1 || empty($info['state'])}checked{/if} />
                             <label for="emailwy1">启用</label>
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" id="emailwy2" name="state" value="2" {if $item['state']==2}checked{/if} />
+                            <input type="radio" id="emailwy2" name="state" value="2" {if $info['state']==2}checked{/if} />
                             <label for="emailwy2">禁用</label>
                         </label>
                     </div>

@@ -30,7 +30,7 @@
 <ul class="nav nav-tabs">    
     <span class="ygxian"></span>
     <div class="ygdangq">当前位置:</div>
-    <li class="active"><a href="javascript:void(0);">审核设置</a></li>
+    <li class="active"><a href="javascript:void(0);">商品设置</a></li>
 
 </ul>
 <script type="text/javascript">
@@ -44,7 +44,7 @@
         <!--<input type="hidden" name="parentid" value="{$parent['id']}" />-->
         <div class="panel panel-default ygdefault">
             <div class="panel-heading wyheader">
-                审核设置
+                商品设置
             </div>
             <div class="panel-body">
         
@@ -60,6 +60,14 @@
                             <label for="emailwy2">关闭</label>
                         </label>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">自动收货时间(天)</label>
+                    <div class="col-sm-9">
+                        <input type="number" name="sh_time" class="form-control" value="{$item['sh_time']}" />
+                        *设置商家发货后多久后自动确认收货,不填或填零则不开启自动收货
+                    </div>
+
                 </div>
                                                
             </div>

@@ -1,6 +1,10 @@
 {template 'public/header'}
 {template 'public/comhead'}
 <link rel="stylesheet" type="text/css" href="../addons/zh_tcwq/template/public/ygcss.css">
+<style type="text/css">
+    .dizhi{margin-top: 10px;color: #44ABF7;}
+
+</style>
 <ul class="nav nav-tabs">    
     <span class="ygxian"></span>
     <div class="ygdangq">当前位置:</div>
@@ -32,6 +36,12 @@
                        {php echo tpl_form_field_color('color', $item['color'])} 
                         <span class="help-block">*不填写会默认选中红色</span>
                     </div>
+                </div> 
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">首页转发自定义标题</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="zf_title"  class="form-control" value="{$item['zf_title']}" />
+                    </div>
                 </div>  
                
 <!--                 <div class="form-group">
@@ -57,7 +67,60 @@
                        </label>
                    </div>
                </div>-->
-                              
+               <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">平台模式</label>
+                    <div class="col-sm-9">
+
+                        <span class="radio-inline">
+                            <input id="moredan1" type="radio" name="model" value="1" {if $item['model']==1}checked{/if} /> 
+                            <label for="moredan1">运营版</label>
+                        </span>
+                        <span class="radio-inline">
+                            <input id="moredan2" type="radio" name="model" value="2" {if $item['model']==2}checked{/if} /> 
+                            <label for="moredan2">过审版</label>
+                        </span>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">过审页幻灯片</label>
+                    <div class="col-sm-9">
+                       {php echo tpl_form_field_multi_image('gs_img',$gs_img);}
+                       <span class="ygmargin">* 建议尺寸大小:750*360px</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">过审页电话</label>
+                    <div class="col-sm-9">
+                       <input type="text" name="gs_tel" class="form-control" value="{$item['gs_tel']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">过审页营业时间</label>
+                    <div class="col-sm-9">
+                       <input type="text" name="gs_time" class="form-control" value="{$item['gs_time']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">过审页地址</label>
+                    <div class="col-sm-9">
+                       <input type="text" name="gs_add" class="form-control" value="{$item['gs_add']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">过审页地址坐标</label>
+                    <div class="col-sm-10">
+                     <!-- {php echo tpl_form_field_coordinate('op',$list['coordinates'])} -->
+                     <input type="text" name="gs_zb" class="form-control dizhiname" value="{$item['gs_zb']}" placeholder="例如:30.527540,114.346430" />
+                     <a href="http://lbs.qq.com/tool/getpoint/" target="_blank">
+                     <p class="dizhi">*点击获取地理位置</p></a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">过审页详情</label>
+                    <div class="col-sm-9">
+                         {php echo tpl_ueditor('gs_details',$item['gs_details']);}
+                    </div>
+                </div>     
                 <div class="form-group">
                    <label for="lastname" class="col-sm-2 control-label">天气和总访问量是否显示</label>
                    <div class="col-sm-10">
@@ -103,14 +166,14 @@
                     </div>
                 </div>  
                 <div class="form-group">
-                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">获取用户信息弹框图片</label>
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">首页弹框图片</label>
                     <div class="col-sm-9">
-                        {php echo tpl_form_field_image('tc_img', $info['tc_img'])}
+                        {php echo tpl_form_field_image('tc_img', $item['tc_img'])}
                         <span class="help-block">*建议尺寸380*300</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">获取用户信息弹框公告</label>
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">首页弹框公告</label>
                     <div class="col-sm-9">
                        <input type="text" name="tc_gg"  class="form-control" value="{$item['tc_gg']}" />
                     </div>

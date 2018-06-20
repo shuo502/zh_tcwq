@@ -5,7 +5,7 @@ $item=pdo_get('zhtc_system',array('uniacid'=>$_W['uniacid']));
     if(checksubmit('submit')){
             $data['is_jf']=$_GPC['is_jf'];
             // $data['integral2']=$_GPC['integral2'];
-            // $data['integral']=$_GPC['integral'];
+            $data['integral']=$_GPC['integral'];
             $data['uniacid']=$_W['uniacid'];
             if($_GPC['id']==''){                
                 $res=pdo_insert('zhtc_system',$data);

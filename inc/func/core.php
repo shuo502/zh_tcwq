@@ -99,12 +99,19 @@ if($type['is_pcfw']==1){
                      0 => $this->createMainMenu('入驻列表 ', $do, 'yellowstore', ''),
                      1=> $this->createMainMenu('分类管理', $do, 'yellowtype', ''),
                      2=> $this->createMainMenu('添加入驻', $do, 'addyellowstore', ''),
-                    3=> $this->createMainMenu('入驻设置', $do, 'yellowset', ''),
-                     4=> $this->createMainMenu('审核设置', $do, 'yellowcheck', ''),
-                   
+                     3=> $this->createMainMenu('入驻设置', $do, 'yellowset', ''),
+                     4=> $this->createMainMenu('审核设置', $do, 'yellowcheck', ''), 
                 )
             );
         }
+        $navemenu[20] = array(
+            'title' => '<a href="index.php?c=site&a=entry&op=display&do=activity&m=zh_tcwq" class="panel-title wytitle" id="yframe-20"><icon style="color:#8d8d8d;" class="fa fa-compass"></icon>活动管理</a>',
+            'items' => array(
+                 0 => $this->createMainMenu('活动管理 ', $do, 'activity', ''),
+                 1 => $this->createMainMenu('分类管理 ', $do, 'acttype', ''),
+                 2 => $this->createMainMenu('活动设置 ', $do, 'activityset', ''),
+            )
+        );
            // $navemenu[5] = array(
            //      'title' => '<a href="index.php?c=site&a=entry&op=display&do=news&m=zh_tcwq" class="panel-title wytitle" id="yframe-5"><icon style="color:#8d8d8d;" class="fa fa-bell"></icon>  公告管理</a>',
            //      'items' => array(
@@ -127,7 +134,7 @@ if($type['is_pcfw']==1){
                 'title' => '<a href="index.php?c=site&a=entry&op=display&do=goods&m=zh_tcwq" class="panel-title wytitle" id="yframe-7"><icon style="color:#8d8d8d;" class="fa fa-cart-plus"></icon>  商品管理</a>',
                 'items' => array(
                      0 => $this->createMainMenu('商品列表 ', $do, 'goods', ''),
-                     3=> $this->createMainMenu('审核设置', $do, 'goodscheck', ''),
+                     3=> $this->createMainMenu('商品设置', $do, 'goodscheck', ''),
                      4=> $this->createMainMenu('订单管理 ', $do, 'ddgl', ''),
                 )
             );
