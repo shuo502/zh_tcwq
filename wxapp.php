@@ -350,7 +350,7 @@ public function doPageUpdPost(){
   public function doPagePostList(){
    global $_GPC, $_W;
   $time=time();
-$gx=" update " . tablename("zhtc_information") . " a inner join (select id from " . tablename("zhtc_information") . "  where dq_time<{$time} and  state=2 and uniacid={$_W['uniacid']} order by dq_time ASC limit 0,100 ) b on a.id =b.id set a.top =2"; 
+$gx=" update " . tablename("zhtc_information") . " a inner join (select id from " . tablename("zhtc_information") . "  where dq_time<{$time} and  state=2 and uniacid={$_W['uniacid']} and top =1 order by dq_time ASC limit 0,100 ) b on a.id =b.id set a.top =2"; 
 pdo_query($gx);
 
   // pdo_update('zhtc_information',array('top'=>2),array('dq_time <'=>time(),'state'=>2,'uniacid'=>$_W['uniacid']));
@@ -400,7 +400,7 @@ public function doPageList(){
  $pageindex = max(1, intval($_GPC['page']));
  $pagesize=10;
   $time=time();
-$gx=" update " . tablename("zhtc_information") . " a inner join (select id from " . tablename("zhtc_information") . "  where dq_time<{$time} and  state=2 and uniacid={$_W['uniacid']} order by dq_time ASC limit 0,100 ) b on a.id =b.id set a.top =2"; 
+$gx=" update " . tablename("zhtc_information") . " a inner join (select id from " . tablename("zhtc_information") . "  where dq_time<{$time} and  state=2 and uniacid={$_W['uniacid']} and top =1 order by dq_time ASC limit 0,100 ) b on a.id =b.id set a.top =2"; 
 pdo_query($gx);
  $where=" where a.type_id=:type_id and a.state=:state and a.del=2 ";
  $data[':type_id']=$_GPC['type_id'];
@@ -439,7 +439,7 @@ echo json_encode($data2);
 public function doPageList2(){
   global $_GPC, $_W;
   $time=time();
-$gx=" update " . tablename("zhtc_information") . " a inner join (select id from " . tablename("zhtc_information") . "  where dq_time<{$time} and  state=2 and uniacid={$_W['uniacid']} order by dq_time ASC limit 0,100 ) b on a.id =b.id set a.top =2"; 
+$gx=" update " . tablename("zhtc_information") . " a inner join (select id from " . tablename("zhtc_information") . "  where dq_time<{$time} and  state=2 and  top=1 and uniacid={$_W['uniacid']} order by dq_time ASC limit 0,100 ) b on a.id =b.id set a.top =2"; 
 pdo_query($gx);
 
 
@@ -713,7 +713,7 @@ public function doPagePay(){
           public function doPageStoreList(){
             global $_W, $_GPC;
             $time=time();
-            $gx=" update " . tablename("zhtc_store") . " a inner join (select id from " . tablename("zhtc_store") . "  where dq_time<={$time} and  state=2 and uniacid={$_W['uniacid']} order by dq_time ASC limit 0,100 ) b on a.id =b.id set a.time_over =1"; 
+            $gx=" update " . tablename("zhtc_store") . " a inner join (select id from " . tablename("zhtc_store") . "  where dq_time<={$time} and time_over =2 and state=2 and uniacid={$_W['uniacid']} order by dq_time ASC limit 0,100 ) b on a.id =b.id set a.time_over =1"; 
             pdo_query($gx);
            
             $where=" where uniacid=:uniacid and time_over !=1 and state=2";
@@ -751,7 +751,7 @@ public function doPagePay(){
          $pageindex = max(1, intval($_GPC['page']));
          $pagesize=$_GPC['pagesize'];
          $time=time();
-            $gx=" update " . tablename("zhtc_store") . " a inner join (select id from " . tablename("zhtc_store") . "  where dq_time<={$time} and  state=2 and uniacid={$_W['uniacid']} order by dq_time ASC limit 0,100 ) b on a.id =b.id set a.time_over =1"; 
+            $gx=" update " . tablename("zhtc_store") . " a inner join (select id from " . tablename("zhtc_store") . "  where dq_time<={$time} and time_over =2 and  state=2 and uniacid={$_W['uniacid']} order by dq_time ASC limit 0,100 ) b on a.id =b.id set a.time_over =1"; 
             pdo_query($gx);
          //pdo_update('zhtc_store',array('time_over'=>1),array('dq_time <='=>time(),'state'=>2,'uniacid'=>$_W['uniacid']));
          if($_GPC['storetype2_id']){
@@ -2342,7 +2342,7 @@ public function doPageMyCommission(){
       global $_W, $_GPC;
     //修改以前的数据
       $time=time();
-      $gx=" update " . tablename("zhtc_yellowstore") . " a inner join (select id from " . tablename("zhtc_yellowstore") . "  where dq_time<={$time} and  state=2 and uniacid={$_W['uniacid']} order by dq_time ASC limit 0,100 ) b on a.id =b.id set a.time_over =1"; 
+      $gx=" update " . tablename("zhtc_yellowstore") . " a inner join (select id from " . tablename("zhtc_yellowstore") . "  where dq_time<={$time} and  state=2 and time_over =2 and  uniacid={$_W['uniacid']} order by dq_time ASC limit 0,100 ) b on a.id =b.id set a.time_over =1"; 
       pdo_query($gx);
 
      // $rst=pdo_update('zhtc_yellowstore',array('time_over'=>1),array('dq_time <='=>time(),'state'=>2,'uniacid'=>$_W['uniacid']));
@@ -2922,7 +2922,10 @@ public function doPageSaveFormid(){
   $data['openid']=$_GPC['openid']; 
   $data['time']=date('Y-m-d H:i:s');
   $data['uniacid']=$_W['uniacid'];
-  $res=pdo_insert('zhtc_userformid',$data);
+  if($_GPC['form_id']!='the formId is a mock one' and $_GPC['form_id']){
+  	 $res=pdo_insert('zhtc_userformid',$data);
+  }
+ 
   if($res){
     echo  '1';
   }else{
@@ -2944,6 +2947,9 @@ public function doPageDelFormid(){
   //获取用户的formid
 public function doPageGetFormid(){
   global $_W, $_GPC;
+  $time=time()-60*60*24*7;
+  $sql="delete from " . tablename("zhtc_userformid") . " where UNIX_TIMESTAMP(time) <=".$time;
+  pdo_query($sql);
   $res=pdo_getall('zhtc_userformid',array('user_id'=>$_GPC['user_id'],'uniacid'=>$_W['uniacid']));
   echo json_encode($res);
 } 

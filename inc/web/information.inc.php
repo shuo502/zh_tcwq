@@ -46,7 +46,7 @@ $pager = pagination($total, $pageindex, $pagesize);
 if($_GPC['op']=='delete'){
     $res=pdo_delete('zhtc_information',array('id'=>$_GPC['id']));
     if($res){
-         message('删除成功！', $this->createWebUrl('information'), 'success');
+         message('删除成功！', $this->createWebUrl('information',array('type'=>$_GPC['type'],'page'=>$_GPC['page'])), 'success');
         }else{
               message('删除失败！','','error');
         }
@@ -69,16 +69,18 @@ if($_GPC['op']=='tg'){
 
    
     if($res){
-         message('通过成功！', $this->createWebUrl('information'), 'success');
+         message('通过成功！', $this->createWebUrl('information',array('type'=>$_GPC['type'],'page'=>$_GPC['page'])), 'success');
         }else{
               message('通过失败！','','error');
         }
 }
 
 if($_GPC['op']=='jj'){
+  $tz=pdo_get('zhtc_information',array('id'=>$_GPC['id']));
     $res=pdo_update('zhtc_information',array('state'=>3,'sh_time'=>time()),array('id'=>$_GPC['id']));
+
     if($res){
-         message('拒绝成功！', $this->createWebUrl('information'), 'success');
+         message('拒绝成功！', $this->createWebUrl('information',array('type'=>$_GPC['type'],'page'=>$_GPC['page'])), 'success');
         }else{
          message('拒绝失败！','','error');
         }
@@ -86,7 +88,7 @@ if($_GPC['op']=='jj'){
 if($_GPC['op']=='defriend'){
     $res4=pdo_update("zhtc_user",array('state'=>2),array('id'=>$_GPC['id']));
     if($res4){
-     message('拉黑成功！', $this->createWebUrl('information',array('page'=>$_GPC['page'])), 'success');
+     message('拉黑成功！', $this->createWebUrl('information',array('type'=>$_GPC['type'],'page'=>$_GPC['page'])), 'success');
     }else{
         message('拉黑失败！','','error');
     }
@@ -94,7 +96,7 @@ if($_GPC['op']=='defriend'){
   if($_GPC['op']=='relieve'){
     $res4=pdo_update("zhtc_user",array('state'=>1),array('id'=>$_GPC['id']));
     if($res4){
-     message('取消成功！', $this->createWebUrl('information',array('page'=>$_GPC['page'])), 'success');
+     message('取消成功！', $this->createWebUrl('information',array('type'=>$_GPC['type'],'page'=>$_GPC['page'])), 'success');
     }else{
         message('取消失败！','','error');
     }

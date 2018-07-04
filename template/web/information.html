@@ -157,8 +157,8 @@
                        {/if} 
                        <td>
                           {if $item['state']==1}
-                           <a href="{php echo $this->createWebUrl('information',array('op'=>'tg','id'=>$item['id'],'page'=>$_GPC['page']));}"><button class="btn ygyouhui2 btn-xs">通过</button></a>
-                           <a href="{php echo $this->createWebUrl('information',array('op'=>'jj','id'=>$item['id']));}"><button class="btn ygshouqian2 btn-xs">拒绝</button></a>
+                           <a href="{php echo $this->createWebUrl('information',array('op'=>'tg','id'=>$item['id'],'type'=>$_GPC['type'],'page'=>$_GPC['page']));}"><button class="btn ygyouhui2 btn-xs">通过</button></a>
+                           <a href="{php echo $this->createWebUrl('information',array('op'=>'jj','id'=>$item['id'],'type'=>$_GPC['type'],'page'=>$_GPC['page']));}"><button class="btn ygshouqian2 btn-xs">拒绝</button></a>
                            {/if}
                            {php $user=pdo_get('zhtc_user',array('id'=>$item['user_id']));}
                            {if $user['state']==1}
@@ -166,7 +166,7 @@
                       {elseif $user['state']==2}
                       <a href="" data-toggle="modal" data-target="#myModalb{$item['user_id']}"><button class="btn storegrey2 btn-xs">取消拉黑</button></a>
                       {/if}
-                          <a href="{php echo $this->createWebUrl('informationinfo',array('id'=>$item['id']));}" class="storespan btn btn-xs">
+                          <a href="{php echo $this->createWebUrl('informationinfo',array('id'=>$item['id'],'type'=>$_GPC['type'],'page'=>$_GPC['page']));}" class="storespan btn btn-xs">
                               <span class="fa fa-pencil"></span>
                               <span class="bianji">编辑
                                   <span class="arrowdown"></span>
@@ -196,7 +196,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <a href="{php echo $this->createWebUrl('information', array('op' => 'delete', 'id' => $item['id']))}" type="button" class="btn btn-info" >确定</a>
+                            <a href="{php echo $this->createWebUrl('information', array('op' => 'delete', 'id' => $item['id'],'type'=>$_GPC['type'],'page'=>$_GPC['page']))}" type="button" class="btn btn-info" >确定</a>
                         </div>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <a href="{php echo $this->createWebUrl('information', array('op' => 'defriend', 'id' => $item['user_id']))}" type="button" class="btn btn-info" >确定</a>
+                            <a href="{php echo $this->createWebUrl('information', array('op' => 'defriend', 'id' => $item['user_id'],'type'=>$_GPC['type'],'page'=>$_GPC['page']))}" type="button" class="btn btn-info" >确定</a>
                         </div>
                     </div>
                 </div>
@@ -230,7 +230,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <a href="{php echo $this->createWebUrl('information', array('op' => 'relieve', 'id' => $item['user_id']))}" type="button" class="btn btn-info" >确定</a>
+                            <a href="{php echo $this->createWebUrl('information', array('op' => 'relieve', 'id' => $item['user_id'],'type'=>$_GPC['type'],'page'=>$_GPC['page']))}" type="button" class="btn btn-info" >确定</a>
                         </div>
                     </div>
                 </div>

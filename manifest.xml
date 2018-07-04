@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns="h    " versionCode="0.6,0.7,0.8,1.0">
+<manifest xmlns="" versionCode="0.6,0.7,0.8,1.0">
 	<application setting="false">
-		<name><![CDATA[微同城多城市版小程序]]></name>
+		<name><![CDATA[左歌科技QQ：525094890 多城市版小程序]]></name>
 		<identifie><![CDATA[zh_tcwq]]></identifie>
-		<version><![CDATA[8.7]]></version>
+		<version><![CDATA[8.9]]></version>
 		<type><![CDATA[services]]></type>
-		<ability><![CDATA[志汇-同城微圈小程序]]></ability>
-		<description><![CDATA[同城微圈小程序]]></description>
-		<author><![CDATA[左歌科技QQ：525094890  ]]></author>
-		<url><![CDATA[]></url>
+		<ability><![CDATA[左歌科技QQ：525094890   -同城微圈小程序]]></ability>
+		<description><![CDATA[左歌科技QQ：525094890同城微圈小程序]]></description>
+		<author><![CDATA[左歌科技QQ：525094890 ]]></author>
+		<url><![CDATA[]]></url>
 	</application>
 	<platform>
 		<subscribes>

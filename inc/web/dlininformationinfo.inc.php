@@ -37,7 +37,7 @@ if(checksubmit('submit')){
 
 	$res = pdo_update('zhtc_information', $data, array('id' => $_GPC['id']));
 	if($res){
-		message('编辑成功',$this->createWebUrl2('dlininformation',array()),'success');
+		message('编辑成功',$this->createWebUrl2('dlininformation',array('type'=>$_GPC['type'],'page'=>$_GPC['page'])),'success');
 	}else{
 		message('编辑失败','','error');
 	}

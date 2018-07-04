@@ -45,7 +45,7 @@ $pager = pagination($total, $pageindex, $pagesize);
 if($_GPC['op']=='delete'){
     $res=pdo_delete('zhtc_information',array('id'=>$_GPC['id']));
     if($res){
-         message('删除成功！', $this->createWebUrl2('dlininformation'), 'success');
+         message('删除成功！', $this->createWebUrl2('dlininformation',array('type'=>$_GPC['type'],'page'=>$_GPC['page'])), 'success');
         }else{
               message('删除失败！','','error');
         }
@@ -66,7 +66,7 @@ if($_GPC['op']=='tg'){
      $res=pdo_update('zhtc_information',array('state'=>2),array('id'=>$_GPC['id']));
   }
     if($res){
-         message('通过成功！', $this->createWebUrl2('dlininformation'), 'success');
+         message('通过成功！', $this->createWebUrl2('dlininformation',array('type'=>$_GPC['type'],'page'=>$_GPC['page'])), 'success');
         }else{
               message('通过失败！','','error');
         }
@@ -75,7 +75,7 @@ if($_GPC['op']=='tg'){
 if($_GPC['op']=='jj'){
     $res=pdo_update('zhtc_information',array('state'=>3,'sh_time'=>time()),array('id'=>$_GPC['id']));
     if($res){
-         message('拒绝成功！', $this->createWebUrl2('dlininformation'), 'success');
+         message('拒绝成功！', $this->createWebUrl2('dlininformation',array('type'=>$_GPC['type'],'page'=>$_GPC['page'])), 'success');
         }else{
          message('拒绝失败！','','error');
         }
